@@ -1,0 +1,65 @@
+<div class="ui menu">
+  <a class="active item" (click)="sidebar = !sidebar">
+    <i class="ellipsis vertical left icon"></i>
+    <div class="ui left fixed vertical menu" *ngIf="sidebar == true">
+      <div class="item">
+        <i class="angle double left icon"></i>
+        <img class="ui mini image" src="https://semantic-ui.com/images/logo.png">
+      </div>
+      <a class="active item">
+        <i class="globe icon"></i>Ma classe
+        <!-- Mettre le nom de la classe a la place style 4AIW2 -->
+      </a>
+      <a class="item">
+        <i class="folder open outline icon"></i> Documents</a>
+      <a class="item">
+        <i class="address card outline icon"></i>Mon profil</a>
+      <a class="item">
+        <i class="sign out alternate icon"></i>Se déconnecter</a>
+    </div>
+  </a>
+
+  <div class="ui pointing dropdown link item" sm-dropdown>
+    <span class="text">
+      <i class="icon mail"></i> Messages 
+      <div class="ui label blue">
+        3
+      </div>
+    </span>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="item">
+        <a class="ui label blue" href="http://google.com">
+          <img class="ui right spaced avatar image" src="https://semantic-ui.com/images/avatar/small/elliot.jpg"> Gili
+        </a> C quoi le JS
+      </div>
+      <div class="item">
+        <a class="ui label blue">
+          <img class="ui right spaced avatar image" src="https://semantic-ui.com/images/avatar/small/joe.jpg"> Nana
+        </a> Ta le caude? du...
+      </div>
+      <div class="item">
+        <a class="ui label blue">
+          <img class="ui right spaced avatar image" src="https://semantic-ui.com/images/avatar/small/justen.jpg"> Youyou
+        </a> Dsl chu beurré
+      </div>
+      <div class="divider"></div>
+      <div class="item">Tous les messages</div>
+    </div>
+  </div>
+
+  <a class="item">
+    <i class="bullhorn icon"></i> Notifications 
+    <div class="ui label red">
+      23
+    </div>
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Rechercher...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
