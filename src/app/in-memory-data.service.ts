@@ -9,9 +9,9 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const posts = [
-      { id: 1, content:'Je découvre IBS et j\'adore ce site !', file: null, id_student: 1 },
-      { id: 2, content:'On remercie tous Brixton pour ce site avec une UX rarement égalée', file: null, id_student: 2 },
-      { id: 3, content:'Quelqu\'un aurait le cours de marketing ?', file: null, id_student: 3 },
+      { id: 1, content:'Je découvre IBS et j\'adore ce site !', file: null, type: 'posted on his page', id_student: 1},
+      { id: 2, content:'On remercie tous Brixton pour ce site avec une UX rarement égalée', file: null, type: 'posted on his page', id_student: 2 },
+      { id: 3, content:'Quelqu\'un aurait le cours de marketing ?', file: null, type: 'added you as a friend', id_student: 3 },
     ];
 
     return {students, posts};

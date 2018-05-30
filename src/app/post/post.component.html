@@ -1,6 +1,26 @@
-<p *ngFor="let post of posts"> {{post.content}}  </p>
-
 <div class="ui feed">
+    <div *ngFor="let post of posts" class="event">
+        <div class="label">
+          <img src="{{showStudentAvatar(post.id_student)}}">
+        </div>
+        <div class="content">
+          <div class="summary">
+            <a>{{showStudentName(post.id_student)}}</a>  {{post.type}} 
+            <div class="date">
+              3 days ago
+            </div>
+          </div>
+          <div class="extra text">
+              {{post.content}} 
+          </div>
+          <div class="meta">
+            <a class="like">
+              <i class="like icon"></i> 5 Likes
+            </a>
+          </div>
+        </div>
+      </div>
+
   <div class="event">
     <div class="label">
       <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
