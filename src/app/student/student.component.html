@@ -1,0 +1,9 @@
+<div class="ui divided list">
+  <div class="item" *ngFor="let student of students">
+    <img class="ui avatar image" src="{{student.avatar}}">
+    <div class="content">
+      <div class="header"><a routerLink="/profile/{{student.id}}"> {{student.name}} </a></div>
+      {{student.bio}}
+    </div>
+  </div>
+</div>

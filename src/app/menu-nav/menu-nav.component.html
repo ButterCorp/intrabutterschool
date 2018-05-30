@@ -1,21 +1,23 @@
 <div class="ui menu">
-  <a class="active item" (click)="sidebar = !sidebar">
+  <a class="active item" sm-sidebar>
     <i class="ellipsis vertical left icon"></i>
-    <div class="ui left fixed vertical menu" *ngIf="sidebar == true">
-      <div class="item">
-        <i class="angle double left icon"></i>
-        <img class="ui mini image" src="https://semantic-ui.com/images/logo.png">
-      </div>
-      <a class="active item">
-        <i class="globe icon"></i>Ma classe
-        <!-- Mettre le nom de la classe a la place style 4AIW2 -->
+    <div class="ui left demo vertical inverted sidebar labeled icon menu">
+      <a class="item" routerLink="/classroom">
+        <i class="home icon"></i>
+        Ma classe <!-- remplacer par le nom réel de la classe -->
       </a>
-      <a class="item">
-        <i class="folder open outline icon"></i> Documents</a>
-      <a class="item">
-        <i class="address card outline icon"></i>Mon profil</a>
-      <a class="item">
-        <i class="sign out alternate icon"></i>Se déconnecter</a>
+      <a class="item" routerLink="/docs">
+        <i class="folder open outline icon"></i>
+        Documents
+      </a>
+      <a class="item" routerLink="/profile/1">
+        <i class="address card outline icon"></i>
+        Mon profil
+      </a>
+      <a class="item" routerLink="/logout">
+        <i class="sign out alternate icon"></i>
+        Se déconnecter
+      </a>
     </div>
   </a>
 
@@ -49,7 +51,7 @@
   </div>
 
   <a class="item">
-    <i class="bullhorn icon"></i> Notifications 
+    <i class="bullhorn icon"></i> Notifications
     <div class="ui label red">
       23
     </div>

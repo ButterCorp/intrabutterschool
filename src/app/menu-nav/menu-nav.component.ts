@@ -1,5 +1,5 @@
-import { Component, OnInit, Directive, ElementRef } from '@angular/core';
-declare var jQuery: any;
+import { Component, OnInit } from '@angular/core';
+import { SemanticDropdownDirective } from '../semantic-dropdown.directive';
 
 @Component({
   selector: 'app-menu-nav',
@@ -7,18 +7,13 @@ declare var jQuery: any;
   styleUrls: ['./menu-nav.component.css']
 })
 
-@Directive({
-  selector: "[sm-dropdown]",
-})
-
 export class MenuNavComponent implements OnInit {
 
   sidebar = false;
 
-  constructor(private el: ElementRef) { }
+  constructor() { }
 
   ngOnInit() {
-    jQuery(this.el.nativeElement).dropdown();
   }
 
 }
