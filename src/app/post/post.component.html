@@ -1,4 +1,22 @@
-<p *ngFor="let post of posts"> {{post.content}}  </p>
+<div class="segment">
+  <div class="ui form">
+    <div class="field">
+      <label>Publier pour votre classe</label>
+      <textarea rows="3" #postContent></textarea>
+    </div>
+    <div class="ui submit button primary" (click)="add(postContent.value); postContent.value=''">Envoyer</div>
+  </div>
+</div>
+
+<div class="ui horizontal divider header">
+  <!-- divider -->Activité da ma classe
+</div>
+
+{{students}}
+
+<p *ngFor="let post of posts"> {{post.content}}
+  <button class="delete" title="delete post" (click)="delete(post)">x</button>
+</p>
 
 <div class="ui feed">
   <div class="event">
@@ -27,14 +45,19 @@
     </div>
     <div class="content">
       <div class="summary">
-        <a>Helen Troy</a> added <a>2 new illustrations</a>
+        <a>Helen Troy</a> added
+        <a>2 new illustrations</a>
         <div class="date">
           4 days ago
         </div>
       </div>
       <div class="extra images">
-        <a><img src="https://semantic-ui.com/images/wireframe/image.png"></a>
-        <a><img src="https://semantic-ui.com/images/wireframe/image.png"></a>
+        <a>
+          <img src="https://semantic-ui.com/images/wireframe/image.png">
+        </a>
+        <a>
+          <img src="https://semantic-ui.com/images/wireframe/image.png">
+        </a>
       </div>
       <div class="meta">
         <a class="like">
@@ -75,7 +98,8 @@
         </div>
       </div>
       <div class="extra text">
-        Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.
+        Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even
+        if we don't run extra laps that day, we surely will come back for more of the same another day soon.
       </div>
       <div class="meta">
         <a class="like">
@@ -90,14 +114,19 @@
     </div>
     <div class="content">
       <div class="summary">
-        <a>Justen Kitsune</a> added <a>2 new photos</a> of you
+        <a>Justen Kitsune</a> added
+        <a>2 new photos</a> of you
         <div class="date">
           4 days ago
         </div>
       </div>
       <div class="extra images">
-        <a><img src="https://semantic-ui.com/images/wireframe/image.png"></a>
-        <a><img src="https://semantic-ui.com/images/wireframe/image.png"></a>
+        <a>
+          <img src="https://semantic-ui.com/images/wireframe/image.png">
+        </a>
+        <a>
+          <img src="https://semantic-ui.com/images/wireframe/image.png">
+        </a>
       </div>
       <div class="meta">
         <a class="like">
@@ -106,4 +135,4 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
