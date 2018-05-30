@@ -16,16 +16,16 @@ export class StudentService {
   /** GET students from the server */
   getStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(this.studentsUrl).pipe(
-      tap(students => console.log(`fetched heroes`)),
-      catchError(this.handleError('getHeroes', []))
+      tap(students => console.log(`fetched students`)),
+      catchError(this.handleError('getStudents', []))
     );
   }
 
   getStudent(id: number): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
     return this.http.get<Student>(url).pipe(
-      tap(_ => console.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Student>(`getHero id=${id}`))
+      tap(_ => console.log(`fetched student id=${id}`)),
+      catchError(this.handleError<Student>(`getStudent id=${id}`))
     );
   }
 
