@@ -27,9 +27,10 @@ export class PostService {
 
   /** POST: add a new post to the server */
   addPost(post: Post): Observable<Post> {
+    console.log(post.id);
     return this.http.post<Post>(this.postUrl, post, httpOptions).pipe(
-      tap((post: Post) => console.log(`added hero w/ id=${post.id}`)),
-      catchError(this.handleError<Post>('addHero'))
+      tap((post: Post) => console.log(`added post w/ id=${post.id}`)),
+      catchError(this.handleError<Post>('addPost'))
     );
   }
 

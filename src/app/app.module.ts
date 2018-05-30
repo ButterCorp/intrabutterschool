@@ -14,6 +14,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SemanticSidebarDirective } from './semantic-sidebar.directive';
+import { SemanticStickyDirective } from './semantic-sticky.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SemanticSidebarDirective } from './semantic-sidebar.directive';
     StudentComponent,
     ProfileComponent,
     SemanticSidebarDirective,
-    PostComponent
+    PostComponent,
+    SemanticStickyDirective
   ],
   imports: [
     BrowserModule,
