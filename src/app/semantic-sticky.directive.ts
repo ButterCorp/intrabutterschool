@@ -10,7 +10,7 @@ export class SemanticStickyDirective {
     console.log(this.el);
     jQuery('.ui.sticky')
     .sticky({
-      context: 'stikcy-wrapper'
+      context: 'sticky-wrapper'
     })
   ;
   }

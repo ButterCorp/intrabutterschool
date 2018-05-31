@@ -3,15 +3,20 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const students = [
-        { id: 1, name: 'Robin', bio: 'The creator', avatar: 'https://semantic-ui.com/images/avatar/small/elliot.jpg' },
-        { id: 2, name: 'Younes', bio: 'In love with Express', avatar: 'https://semantic-ui.com/images/avatar/small/justen.jpg' },
-        { id: 3, name: 'Gili', bio: 'Learning angular 6', avatar: 'https://semantic-ui.com/images/avatar/small/joe.jpg' }
+        { id: 1, name: 'Robin', rank: 'Administrateur', bio: 'The creator', avatar: 'https://semantic-ui.com/images/avatar/large/elliot.jpg' },
+        { id: 2, name: 'Younes', rank: 'Administrateur', bio: 'In love with Express', avatar: 'https://semantic-ui.com/images/avatar/large/justen.jpg' },
+        { id: 3, name: 'Gili', rank: 'Administrateur', bio: 'Learning angular 6', avatar: 'https://semantic-ui.com/images/avatar/large/joe.jpg' },
+        { id: 4, name: 'Jane', rank: 'Membre', bio: 'Looking for Doe', avatar: 'https://semantic-ui.com/images/avatar/large/stevie.jpg' },
+        { id: 5, name: 'James', rank: 'Délégué', bio: 'Also called Santa', avatar: 'https://semantic-ui.com/images/avatar/large/jenny.jpg' },
+        { id: 6, name: 'Bastien', rank: 'Membre', bio: 'New sneak on my feet', avatar: 'https://semantic-ui.com/images/avatar2/large/matthew.png'}
     ];
 
     const posts = [
-      { id: 1, content:'Je découvre IBS et j\'adore ce site !', file: null, type: 'posted on his page', id_student: 1},
-      { id: 2, content:'On remercie tous Brixton pour ce site avec une UX rarement égalée', file: null, type: 'posted on his page', id_student: 2 },
-      { id: 3, content:'Quelqu\'un aurait le cours de marketing ?', file: null, type: 'added you as a friend', id_student: 3 },
+      { id: 1, content:'Je découvre IBS et j\'adore ce site !', file: null, type: 'à posté un message', id_student: 4 },
+      { id: 2, content:'On remercie tous Brixton pour ce site avec une UX rarement égalée', file: null, type: 'à posté un message', id_student: 2 },
+      { id: 3, content:'Quelqu\'un aurait le cours de marketing ?', file: null, type: 'à posté un message', id_student: 5 },
+      { id: 4, content:'Comment faire un site facilement svp?', file: null, type: 'à posté un message', id_student: 3 },
+      { id: 5, content:'Sur la fin d\'IBS !', file:null, type:'à posté un message', id_student: 1 }
     ];
 
     return {students, posts};

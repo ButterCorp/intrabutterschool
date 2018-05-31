@@ -26,7 +26,33 @@ export class PostComponent implements OnInit {
 
   getPosts(): void {
     this.postService.getPosts()
-        .subscribe(posts => this.posts = posts);
+        .subscribe(posts => this.posts = posts.reverse());
+  }
+  
+  getStudents(): void {
+    this.studentService.getStudents()
+        .subscribe(students => this.students = students)
+  }
+
+  add(content: string): void {
+    content = content.trim();
+    if (!content) { return; }
+    var newPost: Post = {
+      id: null,
+      content: content,
+      file: null,
+      type: 'à posté',
+      id_student: 1
+  };
+    this.postService.addPost(newPost)
+      .subscribe(post => {
+        this.posts.push(post);
+      });
+  }
+
+  delete(post: Post): void {
+    this.posts = this.posts.filter(h => h !== post);
+    this.postService.deletePost(post).subscribe();
   }
 
    showStudentName(id: number): String {
@@ -59,32 +85,6 @@ export class PostComponent implements OnInit {
        });
     }
     return avatar;
-  }
-
-  getStudents(): void {
-    this.studentService.getStudents()
-        .subscribe(students => this.students = students)
-  }
-
-  add(content: string): void {
-    content = content.trim();
-    if (!content) { return; }
-    var newPost: Post = {
-      id: null,
-      content: content,
-      file: null,
-      type: 'à posté',
-      id_student: 1
-  };
-    this.postService.addPost(newPost)
-      .subscribe(post => {
-        this.posts.push(post);
-      });
-  }
-
-  delete(post: Post): void {
-    this.posts = this.posts.filter(h => h !== post);
-    this.postService.deletePost(post).subscribe();
   }
 
 }

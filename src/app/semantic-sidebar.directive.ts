@@ -11,7 +11,6 @@ export class SemanticSidebarDirective {
   @HostListener('mouseup') onMouseUp() {
     jQuery('.ui.labeled.icon.sidebar')
     .sidebar('toggle');
-    console.log(this.el);
   }
 
 }
