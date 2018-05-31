@@ -29,36 +29,13 @@ export class PostComponent implements OnInit {
         .subscribe(posts => this.posts = posts);
   }
 
-   showStudentName(id: number): String {
-    let name;
-    //Si le tableau d'objet students n'est pas undefined, en gros si la fonction getStudents a bien été appeler avant
-    if(typeof this.students != "undefined"){
-      //Pour chaque etudiant
-      this.students.forEach(function(entry) {
-        //Si l'id passé en paramètre correspond à l'id de l'étudiant
-        if(id == entry.id){
-          //Alors on retourne le nom de l'étudiant
-          name = entry.name;
-        }
-       });
+  showCredentialFromStudent(id: number, credential: string): String {
+     if(typeof this.students != "undefined"){
+        var students = this.students;
+        var result = students.filter(student => student.id == id);
+        return result[0][credential];
     }
-    return name;
-  }
-
-  showStudentAvatar(id: number): String {
-    let avatar;
-    //Si le tableau d'objet students n'est pas undefined, en gros si la fonction getStudents a bien été appeler avant
-    if(typeof this.students != "undefined"){
-      //Pour chaque etudiant
-      this.students.forEach(function(entry) {
-        //Si l'id passé en paramètre correspond à l'id de l'étudiant
-        if(id == entry.id){
-          //Alors on retourne le nom de l'étudiant
-          avatar = entry.avatar;
-        }
-       });
-    }
-    return avatar;
+   
   }
 
   getStudents(): void {

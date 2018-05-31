@@ -15,11 +15,11 @@
 <div class="ui feed">
   <div *ngFor="let post of posts" class="event">
     <div class="label">
-      <img src="{{showStudentAvatar(post.id_student)}}">
+      <img src="{{showCredentialFromStudent(post.id_student, 'avatar')}}">
     </div>
     <div class="content">
       <div class="summary">
-        <a>{{showStudentName(post.id_student)}}</a> {{post.type}}
+        <a>{{showCredentialFromStudent(post.id_student, 'name')}}</a> {{post.type}}
         <div class="date">
           3 days ago
         </div>
