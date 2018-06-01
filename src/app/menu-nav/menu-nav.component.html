@@ -1,5 +1,5 @@
 <div class="ui menu">
-  <a class="active item" sm-sidebar>
+  <a class="active item" title="Menu" sm-sidebar>
     <i class="ellipsis vertical left icon"></i>
     <div class="ui left demo vertical inverted sidebar labeled icon menu">
       <a class="item" routerLink="/classroom">
@@ -14,11 +14,19 @@
         <i class="address card outline icon"></i>
         Mon profil
       </a>
+      <a class="item" *ngIf="1" routerLink="/admin"> <!-- check for student.rank -->
+        <i class="sliders horizontal icon"></i>
+        Administration
+      </a>
       <a class="item" routerLink="/logout">
         <i class="sign out alternate icon"></i>
         Se déconnecter
       </a>
     </div>
+  </a>
+
+  <a class="item" title="Retour en arrière" (click)="goBack()">
+    <i class="chevron left icon"></i>
   </a>
 
   <div class="ui pointing dropdown link item" sm-dropdown>

@@ -5,12 +5,14 @@ import { StudentComponent } from './student/student.component';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/classroom', pathMatch: 'full' },
   { path: 'students', component: StudentComponent },
   { path: 'classroom', component: ClassroomComponent },
   { path: 'docs', component: DocumentsComponent },
+  { path: 'admin', component: AdminComponent },
   //{ path: 'logout', component: LogoutComponent },
   { path: 'profile/:id', component: ProfileComponent },
 

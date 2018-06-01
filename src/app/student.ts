@@ -4,4 +4,5 @@ export class Student {
     rank: string;
     bio: string;
     avatar: string;
+    active: boolean;
 }

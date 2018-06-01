@@ -1,0 +1,84 @@
+<div class="ui container" style="margin-top: 50px;">
+
+
+  <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui vertical fluid tabular menu">
+        <a class="item {{(selectedItem=='classroom')?'active':''}}" (click)="selectedItem = 'classroom'">
+          Classe
+        </a>
+        <a class="item {{(selectedItem=='user')?'active':''}}" (click)="selectedItem = 'user'">
+          Utilisateurs
+        </a>
+        <!--<a class="item">
+            Companies
+          </a>
+          <a class="item">
+            Links
+          </a>-->
+      </div>
+    </div>
+    <div class="twelve wide stretched column">
+      <div class="ui segment" *ngIf="selectedItem == 'classroom'">
+        Classe
+      </div>
+      <div class="ui segment" *ngIf="selectedItem == 'user'">
+        <table class="ui very basic collapsing celled table" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Etudiant</th>
+              <th>Rang</th>
+              <th>Publications</th>
+              <th>Fichiers</th>
+              <th>Actif</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td>
+                <h4 class="ui image header">
+                  <img src="{{student.avatar}}" class="ui mini rounded image">
+                  <div class="content">
+                    <a routerLink="/profile/{{student.id}}">{{student.name}}</a>
+                    <div class="sub header">{{student.bio}}
+                    </div>
+                  </div>
+                </h4>
+              </td>
+              <td>
+                {{student.rank}}
+              </td>
+              <td>
+                10
+              </td>
+              <td>
+                7
+              </td>
+              <td>
+                <div class="ui negative basic animated button" tabindex="0" 
+                *ngIf="student.active == 0" 
+                (click)="banStudent(student)">
+                  <div class="hidden content" style="color: green;">Activer</div>
+                  <div class="visible content">
+                    <i class="ban icon"></i>
+                  </div>
+                </div>
+
+                <div class="ui positive basic animated button" tabindex="0" 
+                *ngIf="student.active == 1" 
+                (click)="banStudent(student)">
+                  <div class="hidden content" style="color: red;">Bannir</div>
+                  <div class="visible content">
+                    <i class="check circle icon"></i>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</div>

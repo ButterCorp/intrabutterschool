@@ -1,4 +1,4 @@
-<div *ngIf="student;">
+<div *ngIf="student && student.active">
 
   <div class="ui container" style="margin-top: 50px;">
     <div class="ui secondary pointing tabular menu">
@@ -6,7 +6,7 @@
         Publications
       </a>
       <a class="item {{(docs)?'active':''}}" (click)="docs = 1; publications = 0;">
-        Documents
+        Bibliothèque
       </a>
       <!--<a class="item">
                 Friends
@@ -42,6 +42,10 @@
         <div class="ui submit button primary" (click)="add(postContent.value); postContent.value=''">Envoyer</div>
       </div>
 
+      <h3 *ngIf="posts.length == 0" style="padding: 15px;">
+        {{student.name}} n'a encore rien publié sur son espace <i class="meh outline icon" style="font-size: 20px;"></i>
+      </h3>
+
       <div class="ui feed">
         <div class="event" *ngFor="let post of posts">
           <div class="label">
@@ -71,7 +75,9 @@
     </div>
 
     <div class="ui bottom attached segment" *ngIf="docs">
-      <h3 style="padding: 15px;">Documents ajoutés par {{student.name}}</h3>
+      <h3 style="padding: 15px;">
+        {{student.name}} à partagé {{documents.length}} documents
+      </h3>
       <div class="ui four cards">
         <div class="ui card" *ngFor="let document of documents">
           <div class="content">

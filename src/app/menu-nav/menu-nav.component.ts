@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SemanticDropdownDirective } from '../semantic-dropdown.directive';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-menu-nav',
@@ -11,9 +12,13 @@ export class MenuNavComponent implements OnInit {
 
   sidebar = false;
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

@@ -4,6 +4,10 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +30,14 @@ export class StudentService {
     return this.http.get<Student>(url).pipe(
       tap(_ => console.log(`fetched student id=${id}`)),
       catchError(this.handleError<Student>(`getStudent id=${id}`))
+    );
+  }
+
+  /** PUT: update the student on the server */
+  updateStudent(student: Student): Observable<any> {
+    return this.http.put(this.studentsUrl, student, httpOptions).pipe(
+      tap(_ => console.log(`updated student id=${student.id}`)),
+      catchError(this.handleError<any>('udpateStudent'))
     );
   }
 

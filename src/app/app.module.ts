@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SemanticSidebarDirective } from './semantic-sidebar.directive';
 import { SemanticStickyDirective } from './semantic-sticky.directive';
 import { DocumentsComponent } from './documents/documents.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DocumentsComponent } from './documents/documents.component';
     PostComponent,
     SemanticStickyDirective,
     DocumentsComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
