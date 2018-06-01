@@ -61,7 +61,5 @@ export class PostComponent implements OnInit {
         var result = students.filter(student => student.id == id);
         return result[0][credential];
     }
-   
   }
-
 }

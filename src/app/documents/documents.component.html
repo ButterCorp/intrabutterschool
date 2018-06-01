@@ -1,0 +1,23 @@
+<div class="ui container" style="margin-top: 50px;">
+
+<div class="ui five cards">
+    <div class="ui card" *ngFor="let document of documents">
+      <div class="content">
+        <div class="right floated meta">0h</div>
+        <img class="ui avatar image" src="{{showCredentialFromStudent(document.id_student, 'avatar')}}"> 
+          <a routerLink="/profile/{{document.id_student}}">{{showCredentialFromStudent(document.id_student, 'name')}}</a>
+      </div>
+      <div class="image">
+        <img class="ui wireframe image" src="https://semantic-ui.com/images/wireframe/image.png">
+      </div>
+      <div class="content">
+        <span class="right floated">
+          <i class="heart outline like icon"></i>
+          0 likes
+        </span>
+        {{document.name}}{{document.ext}}
+      </div>
+    </div>
+  </div>
+
+</div>

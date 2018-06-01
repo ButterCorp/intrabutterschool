@@ -2,6 +2,10 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
+    const classroom = [
+       { id: 1, name:'4IW2', school: 'ESGI'}
+    ];
+
     const students = [
         { id: 1, name: 'Robin', rank: 'Administrateur', bio: 'The creator', avatar: 'https://semantic-ui.com/images/avatar/large/elliot.jpg' },
         { id: 2, name: 'Younes', rank: 'Administrateur', bio: 'In love with Express', avatar: 'https://semantic-ui.com/images/avatar/large/justen.jpg' },
@@ -16,10 +20,19 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 2, content:'On remercie tous Brixton pour ce site avec une UX rarement égalée', file: null, type: 'à posté un message', id_student: 2 },
       { id: 3, content:'Quelqu\'un aurait le cours de marketing ?', file: null, type: 'à posté un message', id_student: 5 },
       { id: 4, content:'Comment faire un site facilement svp?', file: null, type: 'à posté un message', id_student: 3 },
-      { id: 5, content:'Sur la fin d\'IBS !', file:null, type:'à posté un message', id_student: 1 }
+      { id: 5, content:'Sur la fin d\'IBS !', file:null, type:'à posté un message', id_student: 1 },
+      { id: 6, content:'Comment renouveler sa licence Jetbrains ? Quelqu\'un se souvient de la manip?', file: null, type: 'à posté un message', id_student: 2 },
     ];
 
-    return {students, posts};
+    const documents = [
+      { id: 1, name:'Marketing', ext:'.xls', id_student: 1},
+      { id: 2, name:'SEO', ext:'.docx', id_student: 1},
+      { id: 1, name:'Bean', ext:'.java', id_student: 2},
+      { id: 1, name:'Laravel', ext:'.txt', id_student: 3},
+      { id: 1, name:'Planing', ext:'.xls', id_student: 5},
+    ];
+
+    return {classroom, students, posts, documents};
   }
 }
 

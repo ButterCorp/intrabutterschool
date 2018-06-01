@@ -1,69 +1,95 @@
-<div *ngIf="student">
+<div *ngIf="student;">
 
-      <div class="ui container" style="margin-top: 50px;">
-          <div class="ui secondary pointing menu">
-              <a class="item active">
-                Publications
-              </a>
-              <a class="item">
-                Documents
-              </a>
-              <!--<a class="item">
+  <div class="ui container" style="margin-top: 50px;">
+    <div class="ui secondary pointing tabular menu">
+      <a class="item {{(publications)?'active':''}}" (click)="docs = 0; publications = 1;">
+        Publications
+      </a>
+      <a class="item {{(docs)?'active':''}}" (click)="docs = 1; publications = 0;">
+        Documents
+      </a>
+      <!--<a class="item">
                 Friends
               </a>-->
-            </div>
-            <div class="twelve wide stretched column">
-              <div class="ui segment grid">
-                  <div class="four wide column">
-                      <img class="ui small circular image" src="{{student.avatar}}">
-                  </div>
-                  <div class="four wide column">
-                      <h1>{{student.name}}</h1>
-                      <h4>{{student.bio}}</h4>
-                  </div>
-                  <div class="four wide column">
-                      <p></p>
-                  </div>
-                  <div class="four wide column">
-                      <a class="ui blue right ribbon label">{{student.rank}}</a>
-                      <p></p>
-                  </div>
-              </div>
-            </div>
-
-            <div class="segment">
-                <div class="ui form">
-                  <div class="field">
-                    <label>Publier un message</label>
-                    <textarea rows="3" #postContent></textarea>
-                  </div>
-                  <div class="ui submit button primary" (click)="add(postContent.value); postContent.value=''">Envoyer</div>
-                </div>
-              </div>
-
-            <div class="ui feed">
-                <div class="event" *ngFor="let post of posts">
-                  <div class="label">
-                    <img src="{{student.avatar}}">
-                  </div>
-                  <div class="content">
-                    <div class="summary">
-                      <a class="user">
-                        {{student.name}}
-                      </a> {{post.type}}
-                      <div class="date">
-                        1 Hour Ago
-                      </div>
-                    </div>
-                    <div class="extra text">
-                        {{post.content}}
-                      </div>
-                    <div class="meta">
-                      <a class="like">
-                        <i class="like icon"></i> 4 Likes
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    </div>
+    <div class="twelve wide stretched column">
+      <div class="ui segment grid">
+        <div class="four wide column">
+          <img class="ui small circular image" src="{{student.avatar}}">
         </div>
+        <div class="four wide column">
+          <h1>{{student.name}}</h1>
+          <h4>{{student.bio}}</h4>
+        </div>
+        <div class="four wide column">
+          <p></p>
+        </div>
+        <div class="four wide column">
+          <a class="ui blue right ribbon label">{{student.rank}}</a>
+          <p></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui bottom attached segment" *ngIf="publications">
+
+      <div class="ui form" *ngIf="student.id == 1">
+        <!-- a remplacer par auth.id() -->
+        <div class="field">
+          <label>Publier un message</label>
+          <textarea rows="3" #postContent></textarea>
+        </div>
+        <div class="ui submit button primary" (click)="add(postContent.value); postContent.value=''">Envoyer</div>
+      </div>
+
+      <div class="ui feed">
+        <div class="event" *ngFor="let post of posts">
+          <div class="label">
+            <img src="{{student.avatar}}">
+          </div>
+          <div class="content">
+            <div class="summary">
+              <a class="user">
+                {{student.name}}
+              </a> {{post.type}}
+              <div class="date">
+                1 Hour Ago
+              </div>
+            </div>
+            <div class="extra text">
+              {{post.content}}
+            </div>
+            <div class="meta">
+              <a class="like">
+                <i class="like icon"></i> 4 Likes
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ui bottom attached segment" *ngIf="docs">
+      <h3 style="padding: 15px;">Documents ajoutés par {{student.name}}</h3>
+      <div class="ui four cards">
+        <div class="ui card" *ngFor="let document of documents">
+          <div class="content">
+            <div class="right floated meta">0h</div>
+            <img class="ui avatar image" src="{{student.avatar}}"> {{student.name}}
+          </div>
+          <div class="image">
+            <img class="ui wireframe image" src="https://semantic-ui.com/images/wireframe/image.png">
+          </div>
+          <div class="content">
+            <span class="right floated">
+              <i class="heart outline like icon"></i>
+              0 likes
+            </span>
+            {{document.name}}{{document.ext}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
