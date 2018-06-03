@@ -4,8 +4,8 @@
   <div class="ui grid">
     <div class="four wide column">
       <div class="ui vertical fluid tabular menu">
-        <a class="item {{(selectedItem=='classroom')?'active':''}}" (click)="selectedItem = 'classroom'">
-          Classe
+        <a class="item {{(selectedItem=='class')?'active':''}}" (click)="selectedItem = 'class'">
+          Classe 
         </a>
         <a class="item {{(selectedItem=='user')?'active':''}}" (click)="selectedItem = 'user'">
           Utilisateurs
@@ -19,8 +19,8 @@
       </div>
     </div>
     <div class="twelve wide stretched column">
-      <div class="ui segment" *ngIf="selectedItem == 'classroom'">
-        Classe
+      <div class="ui segment" *ngIf="selectedItem == 'class'">
+        Classe {{classroom.name}}
       </div>
       <div class="ui segment" *ngIf="selectedItem == 'user'">
         <table class="ui very basic collapsing celled table" style="width: 100%">

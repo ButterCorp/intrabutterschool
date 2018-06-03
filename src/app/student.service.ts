@@ -25,6 +25,7 @@ export class StudentService {
     );
   }
 
+  /** GET student from the server */
   getStudent(id: number): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
     return this.http.get<Student>(url).pipe(

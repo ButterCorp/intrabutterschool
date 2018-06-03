@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Classroom } from '../classroom';
+import { ClassroomService } from '../classroom.service';
 
 @Component({
   selector: 'app-classroom',

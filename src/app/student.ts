@@ -5,4 +5,5 @@ export class Student {
     bio: string;
     avatar: string;
     active: boolean;
+    id_classroom: number;
 }

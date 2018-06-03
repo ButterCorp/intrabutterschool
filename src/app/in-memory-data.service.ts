@@ -7,12 +7,12 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const students = [
-        { id: 1, name: 'Robin', rank: 'Administrateur', bio: 'The creator', avatar: 'https://semantic-ui.com/images/avatar/large/elliot.jpg', active: 1 },
-        { id: 2, name: 'Younes', rank: 'Administrateur', bio: 'In love with Express', avatar: 'https://semantic-ui.com/images/avatar/large/justen.jpg', active: 1 },
-        { id: 3, name: 'Gili', rank: 'Administrateur', bio: 'Learning angular 6', avatar: 'https://semantic-ui.com/images/avatar/large/joe.jpg', active: 1 },
-        { id: 4, name: 'Jane', rank: 'Membre', bio: 'Looking for Doe', avatar: 'https://semantic-ui.com/images/avatar/large/stevie.jpg', active: 1 },
-        { id: 5, name: 'James', rank: 'Délégué', bio: 'Also called Santa', avatar: 'https://semantic-ui.com/images/avatar/large/jenny.jpg', active: 1 },
-        { id: 6, name: 'Bastien', rank: 'Membre', bio: 'New sneak on my feet', avatar: 'https://semantic-ui.com/images/avatar2/large/matthew.png', active: 0 }
+        { id: 1, name: 'Robin', rank: 'Administrateur', bio: 'The creator', avatar: 'https://semantic-ui.com/images/avatar/large/elliot.jpg', active: 1, id_classroom: 1 },
+        { id: 2, name: 'Younes', rank: 'Administrateur', bio: 'In love with Express', avatar: 'https://semantic-ui.com/images/avatar/large/justen.jpg', active: 1, id_classroom: 1 },
+        { id: 3, name: 'Gili', rank: 'Administrateur', bio: 'Learning angular 6', avatar: 'https://semantic-ui.com/images/avatar/large/joe.jpg', active: 1, id_classroom: 1 },
+        { id: 4, name: 'Jane', rank: 'Membre', bio: 'Looking for Doe', avatar: 'https://semantic-ui.com/images/avatar/large/stevie.jpg', active: 1, id_classroom: 1 },
+        { id: 5, name: 'James', rank: 'Délégué', bio: 'Also called Santa', avatar: 'https://semantic-ui.com/images/avatar/large/jenny.jpg', active: 1, id_classroom: 1 },
+        { id: 6, name: 'Bastien', rank: 'Membre', bio: 'New sneak on my feet', avatar: 'https://semantic-ui.com/images/avatar2/large/matthew.png', active: 0, id_classroom: 1 }
     ];
 
     const posts = [
