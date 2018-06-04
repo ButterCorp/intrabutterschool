@@ -16,11 +16,14 @@
           <a class="item">
             Links
           </a>-->
+        <a class="item {{(selectedItem=='settings')?'active':''}}" (click)="selectedItem = 'settings'">
+          Paramètrages
+        </a>
       </div>
     </div>
     <div class="twelve wide stretched column">
       <div class="ui segment" *ngIf="selectedItem == 'class'">
-        Classe {{classroom.name}}
+        <h3>Classe {{classroom.name}}</h3>
       </div>
       <div class="ui segment" *ngIf="selectedItem == 'user'">
         <table class="ui very basic collapsing celled table" style="width: 100%">
@@ -76,6 +79,9 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="ui segment" *ngIf="selectedItem == 'settings'">
+        <h3>Paramètrage {{classroom.name}}</h3>
       </div>
     </div>
   </div>

@@ -17,6 +17,7 @@ import { SemanticSidebarDirective } from './semantic-sidebar.directive';
 import { SemanticStickyDirective } from './semantic-sticky.directive';
 import { DocumentsComponent } from './documents/documents.component';
 import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AdminComponent } from './admin/admin.component';
     SemanticStickyDirective,
     DocumentsComponent,
     AdminComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
