@@ -29,7 +29,7 @@
       </div>
       <div class="meta">
         <a class="like">
-          <i class="like icon"></i> 5 Likes
+          <i class="like icon" (click)="updateLike(post.id)"></i> {{showNumberOfLike(post.id)}} Likes
         </a>
       </div>
     </div>

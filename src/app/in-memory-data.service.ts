@@ -32,7 +32,13 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 1, name:'Planing', ext:'.xls', id_student: 5},
     ];
 
-    return {classroom, students, posts, documents};
+    const likes = [
+      { id: 1, id_post: 1, id_student: 1},
+      { id: 2, id_post: 1, id_student: 2},
+      { id: 3, id_post: 2, id_student: 1},
+    ];
+
+    return {classroom, students, posts, documents, likes};
   }
 }
 

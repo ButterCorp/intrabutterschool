@@ -18,6 +18,7 @@ import { SemanticStickyDirective } from './semantic-sticky.directive';
 import { DocumentsComponent } from './documents/documents.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
+import { LikesComponent } from './likes/likes.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LoginComponent } from './login/login.component';
     DocumentsComponent,
     AdminComponent,
     LoginComponent,
+    LikesComponent,
   ],
   imports: [
     BrowserModule,

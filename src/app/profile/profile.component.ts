@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
       id: null,
       content: content,
       file: null,
-      type: 'à posté',
+      type: 'à posté un message',
       id_student: 1
   };
     this.postService.addPost(newPost)
