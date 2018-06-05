@@ -34,11 +34,16 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const likes = [
       { id: 1, id_post: 1, id_student: 1},
+<<<<<<< HEAD
       { id: 2, id_post: 2, id_student: 2},
       { id: 3, id_post: 2, id_student: 1},
       { id: 4, id_post: 2, id_student: 3},
       { id: 5, id_post: 2, id_student: 4},
       { id: 6, id_post: 2, id_student: 5}
+=======
+      { id: 2, id_post: 1, id_student: 2},
+      { id: 3, id_post: 2, id_student: 1},
+>>>>>>> bcfe62845a10b3a608b17129f333f4134b1bee6e
     ];
 
     return {classroom, students, posts, documents, likes};
