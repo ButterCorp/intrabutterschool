@@ -36,14 +36,15 @@
       <div class="ui form" *ngIf="student.id == 1">
         <!-- a remplacer par auth.id() -->
         <div class="field">
-          <label>Publier un message</label>
+          <label>Publier un message {{postToUpdate?.content}}</label>
           <textarea rows="3" #postContent></textarea>
         </div>
         <div class="ui submit button primary" (click)="add(postContent.value); postContent.value=''">Envoyer</div>
       </div>
 
       <h3 *ngIf="posts.length == 0" style="padding: 15px;">
-        {{student.name}} n'a encore rien publié sur son espace <i class="meh outline icon" style="font-size: 20px;"></i>
+        {{student.name}} n'a encore rien publié sur son espace
+        <i class="meh outline icon" style="font-size: 20px;"></i>
       </h3>
 
       <div class="ui feed">
@@ -58,6 +59,11 @@
               </a> {{post.type}}
               <div class="date">
                 1 Hour Ago
+              </div>
+              <div class="actions-buttons" *ngIf="post.id_student == 1">
+                <!-- replace by auth.id -->
+                <i class="pencil alternate icon" title="Editer le post" (click)="postToUpdate = post" sm-modal-small></i>
+                <i class="times icon" title="Supprimer le post" (click)="postToDelete = post" sm-modal-basic></i>
               </div>
             </div>
             <div class="extra text">
@@ -95,6 +101,48 @@
             {{document.name}}{{document.ext}}
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal (launch with sm-modal directive. see semantic-modale.directive for more infos) -->
+    <div class="ui basic modal">
+      <div class="ui icon header">
+        <i class="trash icon"></i>
+        Suppression d'une publication
+      </div>
+      <div class="content">
+        <p>Vous êtes sur le point de supprimer une publication, voulez-vous continuer?</p>
+      </div>
+      <div class="actions">
+        <div class="ui red basic cancel inverted button">
+          <i class="remove icon"></i>
+          Annuler
+        </div>
+        <div class="ui green ok inverted button" (click)="delete(postToDelete)">
+          <i class="checkmark icon"></i>
+          Oui, supprimer cette publication
+        </div>
+      </div>
+    </div>
+
+    <div class="ui small modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Modifier la publication
+      </div>
+      <div class="image content">
+        <div class="image">
+          <img class="ui avatar image" src="{{student.avatar}}">
+        </div>
+        <div class="description ui form">
+          <div class="field">
+            <textarea cols="80" rows="1" #postContent>{{postToUpdate?.content}}</textarea>
+          </div>  
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui button">Annuler</div>
+        <div class="ui button positive" (click)="update(postToUpdate, postContent.value) ; postToUpdate = null">Mettre à jour</div>
       </div>
     </div>
 

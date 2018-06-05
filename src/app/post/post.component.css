@@ -1,0 +1,8 @@
+.actions-buttons {
+    float: right;
+    margin-right: 70%;
+}
+
+.actions-buttons .icon {
+    cursor: pointer;
+}

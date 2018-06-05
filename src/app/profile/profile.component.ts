@@ -61,13 +61,23 @@ export class ProfileComponent implements OnInit {
       id: null,
       content: content,
       file: null,
-      type: 'à posté',
+      type: 'à posté un message',
       id_student: 1
   };
     this.postService.addPost(newPost)
       .subscribe(post => {
         this.posts.push(post);
       });
+  }
+
+  delete(post: Post): void {
+    this.posts = this.posts.filter(h => h !== post);
+    this.postService.deletePost(post).subscribe();
+  }
+
+  update(post: Post, content: string): void {
+    post.content = content;
+    this.postService.updatePost(post).subscribe();
   }
 
 }

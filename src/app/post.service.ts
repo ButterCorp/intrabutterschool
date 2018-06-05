@@ -44,6 +44,14 @@ export class PostService {
     );
   }
 
+  /** PUT: update the post on the server */
+  updatePost(post: Post): Observable<any> {
+    return this.http.put(this.postUrl, post, httpOptions).pipe(
+      tap(_ => console.log(`updated post id=${post.id}`)),
+      catchError(this.handleError<any>('updatePost'))
+    );
+  }
+
   /**
  * Handle Http operation that failed.
  * Let the app continue.
