@@ -40,11 +40,8 @@ import { SemanticModalSmallDirective } from './semantic-modal-small.directive';
     AdminComponent,
     LoginComponent,
     LikesComponent,
-<<<<<<< HEAD
     SemanticModalBasicDirective,
     SemanticModalSmallDirective,
-=======
->>>>>>> bcfe62845a10b3a608b17129f333f4134b1bee6e
   ],
   imports: [
     BrowserModule,
