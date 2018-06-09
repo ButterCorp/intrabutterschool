@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Post } from './post';
+import { Document } from './document';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -16,6 +17,13 @@ export class PostService {
   private postUrl = "api/posts";
 
   constructor(private http: HttpClient) { }
+
+  getDocuments(): Observable<Document[]> {
+    return this.http.get<Document[]>(this.postUrl).pipe(
+      tap(students => console.log(`fetched documents`)),
+      catchError(this.handleError('getDocuments', []))
+    );
+  }
 
   /** GET posts from the server */
   getPosts(): Observable<Post[]> {

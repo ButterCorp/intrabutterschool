@@ -130,13 +130,9 @@ export class PostComponent implements OnInit {
   showNumberOfLike(id: number){
     let count = 0;
     if(typeof this.likes != "undefined"){
-      this.likes.forEach(function(entry) {
-        if(id == entry.id_post){
-          count++;
-        }
-      });
+      let result = this.likes.filter(like => like.id_post == id);
+      count = result.length;
     }
     return count;
   }
-
 }
