@@ -3,10 +3,12 @@ import { Student } from '../student';
 import { StudentService } from '../student.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
+import { LikesService } from '../likes.service';
 import { Document } from '../document';
 import { DocumentService } from '../document.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Likes } from '../likes';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +20,9 @@ export class ProfileComponent implements OnInit {
 
   @Input() student: Student;
   posts: Post[];
+  allPosts: Post[];
   documents: Document[];
+  likes: Likes[];
 
   publications = 1; //initialisé le tab sur la vue 
 
@@ -27,13 +31,16 @@ export class ProfileComponent implements OnInit {
     private studentService: StudentService,
     private postService: PostService,
     private documentService: DocumentService,
-    private location: Location
+    private location: Location,
+    private likesService: LikesService
   ) { }
 
   ngOnInit() {
     this.getStudent(); //get the actual student from the URL param
     this.getPostsFromStudent(); //get all posts from this student
     this.getDocumentsFromStudent();
+    this.getLikes();
+    this.getAllPosts();
   }
 
   getStudent(): void {
@@ -42,10 +49,20 @@ export class ProfileComponent implements OnInit {
         .subscribe(student => this.student = student);
   }
 
+  getLikes(): void {
+    this.likesService.getLikes()
+        .subscribe(likes => this.likes = likes);
+  }
+
   getPostsFromStudent(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.postService.getPosts()
         .subscribe(posts => this.posts = posts.filter(posts => posts.id_student === id).reverse());
+  }
+  getAllPosts(): void {
+    this.postService.getPosts()
+        .subscribe(posts => this.allPosts = posts.reverse());
+        //.subscribe(posts => console.log(posts));
   }
 
   getDocumentsFromStudent(): void {
@@ -66,7 +83,7 @@ export class ProfileComponent implements OnInit {
   };
     this.postService.addPost(newPost)
       .subscribe(post => {
-        this.posts.push(post);
+        this.posts.unshift(post);
       });
   }
 
@@ -79,5 +96,55 @@ export class ProfileComponent implements OnInit {
     post.content = content;
     this.postService.updatePost(post).subscribe();
   }
+
+  showNumberOfLike(id: number){
+    let count = 0;
+    if(typeof this.likes != "undefined"){
+      this.likes.forEach(function(entry) {
+        if(id == entry.id_post){
+          count++;
+        }
+      });
+    }
+    return count;
+  }
+  updateLike(id_post: number){
+    var id_student = 1;
+    var find = 0;
+    var id_to_delete = 0;
+    this.likes.forEach(function(entry) {
+      if(id_student == entry.id_student && id_post == entry.id_post){
+        find = 1;
+        id_to_delete = entry.id;
+      }
+    });
+    if(find == 0){
+      var newLike: Likes = {
+        id: null,
+        id_post: id_post,
+        id_student: id_student
+      };
+    
+    this.likesService.updateLikeService(newLike)
+        .subscribe(likes =>{
+          this.likes.push(likes);
+        });
+
+    } else {
+      var likes: Likes = {
+        id: id_to_delete,
+        id_student: 1,
+        id_post: id_post
+      };
+      this.likes = this.likes.filter(likes => likes.id !== id_to_delete);
+      this.likesService. removeLikeService(likes).subscribe();
+    }
+  }
+  showPostFromId(id: number): String {
+    if(typeof this.allPosts != "undefined"){
+       var result = this.allPosts.filter(post => post.id == id);
+       return result[0]['content'];
+   }
+ }
 
 }

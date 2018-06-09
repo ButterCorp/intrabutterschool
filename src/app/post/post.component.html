@@ -34,8 +34,8 @@
         {{post.content}}
       </div>
       <div class="meta">
-        <a class="like" (click)="updateLike(post.id)">
-          <i class="like icon"></i> {{showNumberOfLike(post.id)}} Likes
+        <a class="like {{isUserLike(post.id)}}" (click)="updateLike(post.id)">
+          <i class="like icon"></i> {{showNumberOfLike(post.id)}} Likes 
         </a>
       </div>
     </div>

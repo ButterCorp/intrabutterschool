@@ -22,6 +22,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 4, content:'Comment faire un site facilement svp?', file: null, type: 'à posté un message', id_student: 3 },
       { id: 5, content:'Sur la fin d\'IBS !', file:null, type:'à posté un message', id_student: 1 },
       { id: 6, content:'Comment renouveler sa licence Jetbrains ? Quelqu\'un se souvient de la manip?', file: null, type: 'à posté un message', id_student: 2 },
+      { id: 7, content:'Angular c\'est trop bien', file: null, type: 'à posté un message', id_student: 3 },
     ];
 
     const documents = [
@@ -38,8 +39,10 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 3, id_post: 2, id_student: 1},
       { id: 4, id_post: 2, id_student: 3},
       { id: 5, id_post: 2, id_student: 4},
-      { id: 6, id_post: 2, id_student: 5}
-
+      { id: 6, id_post: 2, id_student: 5},
+      { id: 6, id_post: 5, id_student: 5},
+      { id: 7, id_post: 1, id_student: 3},
+      { id: 8, id_post: 3, id_student: 3},
     ];
 
     return {classroom, students, posts, documents, likes};

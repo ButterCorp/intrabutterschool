@@ -60,43 +60,54 @@ export class PostComponent implements OnInit {
       });
   }
 
+  isUserLike(id_post: number){
+    var id_student = 1;
+    var id_to_delete = 0;
+    var retour = "";
+    if(typeof this.likes != "undefined"){
+      this.likes.forEach(function(entry) {
+        if(id_student == entry.id_student && id_post == entry.id_post){
+          id_to_delete = entry.id;
+        }   
+      });
+      if(id_to_delete != 0) retour = "active";
+      if(id_to_delete == 0) retour = "";
+
+      return retour;
+    }
+   
+  }
+
   updateLike(id_post: number){
     var id_student = 1;
-    var find = 0;
     var id_to_delete = 0;
     this.likes.forEach(function(entry) {
       if(id_student == entry.id_student && id_post == entry.id_post){
-        find = 1;
         id_to_delete = entry.id;
       }
     });
-    
-    console.log("find ="+find);
-
-    if(find == 0){
+    if(id_to_delete == 0){
       var newLike: Likes = {
-      id: null,
-      id_post: id_post,
-      id_student: id_student
-    };
+        id: null,
+        id_post: id_post,
+        id_student: id_student
+      };
     
     this.likesService.updateLikeService(newLike)
         .subscribe(likes =>{
           this.likes.push(likes);
         });
-        // .subscribe(likes => {
-        //   this.likes.unshift(likes);
-        // });
-  } else {
-    var likes: Likes = {
-      id: id_to_delete,
-      id_student: 1,
-      id_post: id_post
-  };
-    this.likes = this.likes.filter(likes => likes.id !== id_to_delete);
-    this.likesService. removeLikeService(likes).subscribe();
+
+    } else {
+      var likes: Likes = {
+        id: id_to_delete,
+        id_student: 1,
+        id_post: id_post
+      };
+      this.likes = this.likes.filter(likes => likes.id !== id_to_delete);
+      this.likesService. removeLikeService(likes).subscribe();
+    }
   }
-}
 
   delete(post: Post): void {
     this.posts = this.posts.filter(h => h !== post);

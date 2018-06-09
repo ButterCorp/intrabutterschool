@@ -19,11 +19,8 @@ import { DocumentsComponent } from './documents/documents.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { LikesComponent } from './likes/likes.component';
-<<<<<<< HEAD
 import { SemanticModalBasicDirective } from './semantic-modal-basic.directive';
 import { SemanticModalSmallDirective } from './semantic-modal-small.directive';
-=======
->>>>>>> bcfe62845a10b3a608b17129f333f4134b1bee6e
 
 @NgModule({
   declarations: [
