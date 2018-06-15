@@ -15,12 +15,16 @@ This project use the following techologies :
 - Firebase
 - SocketIO
 
+https://intrabutterschool.firebaseapp.com
+Mirror of this git master branch.
+
 ## Wanna join the ButterCorp Community : 
 
 ### Become a slack member : 
 
 <img src="https://png.icons8.com/dusk/50/000000/slack.png">
-[Slack Invitation](https://join.slack.com/t/esgi-lalampe/shared_invite/enQtMzgzMzQ2NTcyNDM4LThhNzU3MGI3MzE2NWNiMGZlMDU2Y2VhMzU1MzdjNDFjNzY3N2Q1OTgwNDRmYmM2NjJjMDIxMzdmNTI2MjI1MGY)
+
+[Slack](https://join.slack.com/t/esgi-lalampe/shared_invite/enQtMzgzMzQ2NTcyNDM4LThhNzU3MGI3MzE2NWNiMGZlMDU2Y2VhMzU1MzdjNDFjNzY3N2Q1OTgwNDRmYmM2NjJjMDIxMzdmNTI2MjI1MGY)
 
 ### Become a discord member :
 <img src="https://png.icons8.com/nolan/50/000000/discord-logo.png">
