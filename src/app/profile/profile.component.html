@@ -63,7 +63,7 @@
               <div class="actions-buttons" *ngIf="post.id_student == 1">
                 <!-- replace by auth.id -->
                 
-                <p-dialog header="Modifier la publication" [(visible)]="displayupdate" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
+                <p-dialog appendTo="body" header="Modifier la publication" [(visible)]="displayupdate" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
                   [minY]="70" [maximizable]="false" [baseZIndex]="10000">
                   <div class="image content">
                     <div class="image">
@@ -83,7 +83,7 @@
                 
                 <i class="pencil alternate icon" title="Editer le post" (click)="postToUpdate = post ; showDialog('update')"></i>
 
-                <p-dialog header="Supprimer une publication" [(visible)]="displaydelete" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
+                <p-dialog appendTo="body" header="Supprimer une publication" [(visible)]="displaydelete" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
                   [minY]="70" [maximizable]="false" [baseZIndex]="10000">
                     <div class="ui icon header">
                       <i class="trash icon"></i>
