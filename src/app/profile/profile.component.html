@@ -2,15 +2,15 @@
 
   <div class="ui container" style="margin-top: 50px;">
     <div class="ui secondary pointing tabular menu">
-      <a class="item {{(publications)?'active':''}}" (click)="docs = 0; publications = 1;">
+      <a class="item {{(publications)?'active':''}}" (click)="docs = 0; publications = 1; like=0">
         Publications
       </a>
-      <a class="item {{(docs)?'active':''}}" (click)="docs = 1; publications = 0;">
+      <a class="item {{(docs)?'active':''}}" (click)="docs = 1; publications = 0; like=0">
         Bibliothèque
       </a>
-      <!--<a class="item">
-                Friends
-              </a>-->
+      <a class="item {{(like)?'active':''}}" (click)="docs = 0; publications = 0; like=1">
+        Mentions j'aime
+      </a>
     </div>
     <div class="twelve wide stretched column">
       <div class="ui segment grid">
@@ -42,7 +42,7 @@
         <div class="ui submit button primary" (click)="add(postContent.value); postContent.value=''">Envoyer</div>
       </div>
 
-      <h3 *ngIf="posts.length == 0" style="padding: 15px;">
+      <h3 *ngIf="posts !== undefined && posts.length == 0" style="padding: 15px;">
         {{student.name}} n'a encore rien publié sur son espace
         <i class="meh outline icon" style="font-size: 20px;"></i>
       </h3>
@@ -111,8 +111,8 @@
               {{post.content}}
             </div>
             <div class="meta">
-              <a class="like">
-                <i class="like icon"></i> 4 Likes
+              <a class="like" (click)="updateLike(post.id)">
+                <i class="like icon"></i> {{showNumberOfLike(post.id)}} Likes
               </a>
             </div>
           </div>
@@ -143,6 +143,25 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="ui bottom attached segment" *ngIf="like">
+      <table class="ui selectable celled table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Contenu du posts</th>
+            <th>Id de l'author</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let like of likes">
+          <tr *ngIf="like.id_student == student.id">
+            <td>{{like.id}}</td>
+            <td>{{showPostFromId(like.id_post)}}</td>
+            <td>{{showAuthorFromPostId(like.id_post)}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   </div>
