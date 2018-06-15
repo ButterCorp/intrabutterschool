@@ -61,19 +61,29 @@ https://www.npmjs.com/get-npm
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
 
-#### Clone this repository
+#### Step 1: Clone this repository
 
 ```
 git clone git@github.com:ButterCorp/intrabutterschool.git
 ```
+and 
+```
+cd intrabutterschool
+```
 
-#### Run the following command
+#### Step 2: Install Angular/CLI
+
+```
+npm install -g @angular/cli
+```
+
+#### Step 3: Run the following command
 
 ```
 npm install
 ```
 
-#### Angular Launch :
+#### Step 4: Angular Launch :
 Run `ng serve` for a dev server or `ng serve --open` (--open opens your favorite browser (Chrome ? <3) with the right PORT). Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Code scaffolding
