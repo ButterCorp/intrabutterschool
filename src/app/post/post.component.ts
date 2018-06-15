@@ -80,12 +80,10 @@ export class PostComponent implements OnInit {
 
   updateLike(id_post: number){
     var id_student = 1;
-    var id_to_delete = 0;
-    this.likes.forEach(function(entry) {
-      if(id_student == entry.id_student && id_post == entry.id_post){
-        id_to_delete = entry.id;
-      }
-    });
+    var temp = this.likes.filter(like => id_student == like.id_student && id_post == like.id_post);
+    var id_to_delete = typeof(temp[0]) != 'undefined' ? temp[0].id : 0;
+
+    //Le post actuel n'a pas de like et du coup il faut ajouter le like
     if(id_to_delete == 0){
       var newLike: Likes = {
         id: null,
@@ -98,7 +96,8 @@ export class PostComponent implements OnInit {
           this.likes.push(likes);
         });
 
-    } else {
+    } //Le post actuel a un like et dans ce cas là il faut supprimer le like
+    else {
       var likes: Likes = {
         id: id_to_delete,
         id_student: 1,
@@ -128,11 +127,10 @@ export class PostComponent implements OnInit {
   }
 
   showNumberOfLike(id: number){
-    let count = 0;
     if(typeof this.likes != "undefined"){
       let result = this.likes.filter(like => like.id_post == id);
-      count = result.length;
+      return result.length;
     }
-    return count;
+    return 0;
   }
 }

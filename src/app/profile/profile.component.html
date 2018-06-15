@@ -9,11 +9,8 @@
         Bibliothèque
       </a>
       <a class="item {{(like)?'active':''}}" (click)="docs = 0; publications = 0; like=1">
-        Like
+        Mentions j'aime
       </a>
-      <!--<a class="item">
-                Friends
-              </a>-->
     </div>
     <div class="twelve wide stretched column">
       <div class="ui segment grid">
@@ -112,15 +109,15 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>ID posts</th>
-            <th>ID Students</th>
+            <th>Contenu du posts</th>
+            <th>Id de l'author</th>
           </tr>
         </thead>
         <tbody *ngFor="let like of likes">
           <tr *ngIf="like.id_student == student.id">
             <td>{{like.id}}</td>
             <td>{{showPostFromId(like.id_post)}}</td>
-            <td>{{student.name}}</td>
+            <td>{{showAuthorFromPostId(like.id_post)}}</td>
           </tr>
         </tbody>
       </table>

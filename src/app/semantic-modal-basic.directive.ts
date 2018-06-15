@@ -9,7 +9,9 @@ export class SemanticModalBasicDirective {
   constructor( private el: ElementRef ) { }
 
   @HostListener('mouseup') onMouseUp() {
+    jQuery('.ui.basic.modal').remove();
     jQuery('.ui.basic.modal').modal('show');
+    console.log('cloooose')
   }
 
 }

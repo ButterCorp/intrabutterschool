@@ -98,27 +98,20 @@ export class ProfileComponent implements OnInit {
   }
 
   showNumberOfLike(id: number){
-    let count = 0;
     if(typeof this.likes != "undefined"){
-      this.likes.forEach(function(entry) {
-        if(id == entry.id_post){
-          count++;
-        }
-      });
+      let result = this.likes.filter(like => like.id_post == id);
+      return result.length;
     }
-    return count;
+    return 0;
   }
+  
   updateLike(id_post: number){
     var id_student = 1;
-    var find = 0;
-    var id_to_delete = 0;
-    this.likes.forEach(function(entry) {
-      if(id_student == entry.id_student && id_post == entry.id_post){
-        find = 1;
-        id_to_delete = entry.id;
-      }
-    });
-    if(find == 0){
+    var temp = this.likes.filter(like => id_student == like.id_student && id_post == like.id_post);
+    var id_to_delete = typeof(temp[0]) != 'undefined' ? temp[0].id : 0;
+
+    //Le post actuel n'a pas de like et du coup il faut ajouter le like
+    if(id_to_delete == 0){
       var newLike: Likes = {
         id: null,
         id_post: id_post,
@@ -130,7 +123,8 @@ export class ProfileComponent implements OnInit {
           this.likes.push(likes);
         });
 
-    } else {
+    } //Le post actuel a un like et dans ce cas là il faut supprimer le like
+    else {
       var likes: Likes = {
         id: id_to_delete,
         id_student: 1,
@@ -140,11 +134,18 @@ export class ProfileComponent implements OnInit {
       this.likesService. removeLikeService(likes).subscribe();
     }
   }
+
   showPostFromId(id: number): String {
     if(typeof this.allPosts != "undefined"){
        var result = this.allPosts.filter(post => post.id == id);
        return result[0]['content'];
    }
  }
+ showAuthorFromPostId(id: number) {
+  if(typeof this.allPosts != "undefined"){
+     var result = this.allPosts.filter(post => post.id == id);
+     return result[0]['id_student'];
+ }
+}
 
 }
