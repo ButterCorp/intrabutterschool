@@ -23,7 +23,10 @@
               "src/assets"
             ],
             "styles": [
-              "semantic/dist/semantic.min.css"
+              "semantic/dist/semantic.min.css",
+              "./node_modules/primeng/resources/themes/omega/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

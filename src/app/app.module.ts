@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -19,8 +20,8 @@ import { DocumentsComponent } from './documents/documents.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { LikesComponent } from './likes/likes.component';
-import { SemanticModalBasicDirective } from './semantic-modal-basic.directive';
-import { SemanticModalSmallDirective } from './semantic-modal-small.directive';
+
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -36,17 +37,17 @@ import { SemanticModalSmallDirective } from './semantic-modal-small.directive';
     DocumentsComponent,
     AdminComponent,
     LoginComponent,
-    LikesComponent,
-    SemanticModalBasicDirective,
-    SemanticModalSmallDirective,
+    LikesComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

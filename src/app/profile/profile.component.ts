@@ -22,6 +22,10 @@ export class ProfileComponent implements OnInit {
 
   publications = 1; //initialisé le tab sur la vue 
 
+  displayupdate: boolean = false;
+  displaydelete: boolean = false;
+  
+  
   constructor(
     private route: ActivatedRoute,
     private studentService: StudentService,
@@ -29,6 +33,21 @@ export class ProfileComponent implements OnInit {
     private documentService: DocumentService,
     private location: Location
   ) { }
+
+  showDialog(id: string) {
+    if(id == 'delete')
+      this.displaydelete = true;
+    else if (id == 'update')
+      this.displayupdate = true;
+  }
+
+  hideDialog(id: string) {
+    if(id == 'delete')
+      this.displaydelete = false;
+    else if (id == 'update')
+      this.displayupdate = false;
+  }
+
 
   ngOnInit() {
     this.getStudent(); //get the actual student from the URL param

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from '../post.service';
 import { StudentService } from '../student.service';
 import { LikesService } from '../likes.service';
 import { Post } from '../post';
 import { Student } from '../student';
 import { Likes } from '../likes';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-post',
@@ -17,11 +19,28 @@ export class PostComponent implements OnInit {
   students: Student[];
   likes: Likes[];
 
+  displayupdate: boolean = false;
+  displaydelete: boolean = false;
+
   constructor(
     private postService: PostService,
     private studentService: StudentService,
     private likesService: LikesService
   ) { }
+
+  showDialog(id: string) {
+    if(id == 'delete')
+      this.displaydelete = true;
+    else if (id == 'update')
+      this.displayupdate = true;
+  }
+
+  hideDialog(id: string) {
+    if(id == 'delete')
+      this.displaydelete = false;
+    else if (id == 'update')
+      this.displayupdate = false;
+  }
 
   ngOnInit() {
     this.getPosts();

@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.0.3",
+    "@angular/animations": "^6.0.5",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
     "@angular/core": "^6.0.3",
@@ -23,6 +23,8 @@
     "angular-in-memory-web-api": "^0.6.0",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
+    "primeicons": "^1.0.0-beta.7",
+    "primeng": "^6.0.0-beta.1",
     "rxjs": "^6.0.0",
     "semantic-ui": "^2.3.1",
     "zone.js": "^0.8.26"
