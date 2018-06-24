@@ -2,13 +2,13 @@
 
   <div class="ui container" style="margin-top: 50px;">
     <div class="ui secondary pointing tabular menu">
-      <a class="item {{(publications)?'active':''}}" (click)="docs = 0; publications = 1; like=0">
+          <a class="item {{(selectedItem=='publications')?'active':''}}" (click)="selectedItem = 'publications'">
         Publications
       </a>
-      <a class="item {{(docs)?'active':''}}" (click)="docs = 1; publications = 0; like=0">
+          <a class="item {{(selectedItem=='docs')?'active':''}}" (click)="selectedItem = 'docs'">
         Bibliothèque
       </a>
-      <a class="item {{(like)?'active':''}}" (click)="docs = 0; publications = 0; like=1">
+      <a class="item {{(selectedItem=='like')?'active':''}}" (click)="selectedItem = 'like'">
         Mentions j'aime
       </a>
     </div>
@@ -19,7 +19,24 @@
         </div>
         <div class="four wide column">
           <h1>{{student.name}}</h1>
-          <h4>{{student.bio}}</h4>
+          <p-dialog appendTo="body" header="Modifier la bio" [(visible)]="displaybio" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
+                  [minY]="70" [maximizable]="false" [baseZIndex]="10000">
+                  <div class="image content">
+                    <div class="image">
+                      <img class="ui avatar image" src="{{student.avatar}}">
+                    </div>
+                    <div class="description ui form">
+                      <div class="field">
+                        <textarea cols="80" rows="1" #bioContent>{{student.bio}}</textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <div class="ui button" (click)="displaybio=false">Annuler</div>
+                    <div class="ui button positive" (click)="updateBio(student, bioContent.value) ; displaybio = false ;">Mettre à jour</div>
+                  </div>
+                </p-dialog>
+          <h4>{{student.bio}} <i class="pencil alternate icon" title="Editer la bio" (click)="student = student; showDialog('bio')"></i> </h4>
         </div>
         <div class="four wide column">
           <p></p>
@@ -31,7 +48,7 @@
       </div>
     </div>
 
-    <div class="ui bottom attached segment" *ngIf="publications">
+    <div class="ui bottom attached segment" *ngIf="selectedItem == 'publications'">
 
       <div class="ui form" *ngIf="student.id == 1">
         <!-- a remplacer par auth.id() -->
@@ -121,7 +138,7 @@
 
     </div>
 
-    <div class="ui bottom attached segment" *ngIf="docs">
+    <div class="ui bottom attached segment" *ngIf="selectedItem == 'docs'">
       <h3 style="padding: 15px;">
         {{student.name}} à partagé {{documents.length}} documents
       </h3>
@@ -145,7 +162,7 @@
       </div>
     </div>
 
-    <div class="ui bottom attached segment" *ngIf="like">
+    <div class="ui bottom attached segment" *ngIf="selectedItem == 'like'">
       <table class="ui selectable celled table">
         <thead>
           <tr>

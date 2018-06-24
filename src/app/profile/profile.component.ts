@@ -18,6 +18,7 @@ import { Likes } from '../likes';
 
 export class ProfileComponent implements OnInit {
 
+  selectedItem = 'publications';
   @Input() student: Student;
   posts: Post[];
   allPosts: Post[];
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
 
   displayupdate: boolean = false;
   displaydelete: boolean = false;
+  displaybio: boolean = false;
   
   
   constructor(
@@ -44,6 +46,8 @@ export class ProfileComponent implements OnInit {
       this.displaydelete = true;
     else if (id == 'update')
       this.displayupdate = true;
+    else if (id == 'bio')
+      this.displaybio = true;
   }
 
   hideDialog(id: string) {
@@ -51,6 +55,8 @@ export class ProfileComponent implements OnInit {
       this.displaydelete = false;
     else if (id == 'update')
       this.displayupdate = false;
+    else if (id == 'bio')
+      this.displaybio = false;
   }
 
 
@@ -114,6 +120,11 @@ export class ProfileComponent implements OnInit {
   update(post: Post, content: string): void {
     post.content = content;
     this.postService.updatePost(post).subscribe();
+  }
+
+  updateBio(student: Student, content: string): void {
+    student.bio = content;
+    this.studentService.updateStudent(student).subscribe();
   }
 
   showNumberOfLike(id: number){
