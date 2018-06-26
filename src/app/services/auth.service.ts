@@ -9,13 +9,18 @@ export class AuthService {
 
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
-  constructor(private _firebaseAuth: AngularFireAuth, private router: Router) {
+
+  constructor(
+     private _firebaseAuth: AngularFireAuth,
+     private router: Router
+    ) {
+
     this.user = _firebaseAuth.authState;
     this.user.subscribe(
       (user) => {
         if (user) {
           this.userDetails = user;
-          console.log(this.userDetails);
+          //console.log(this.userDetails);
         }
         else {
           this.userDetails = null;
@@ -29,6 +34,7 @@ export class AuthService {
       new firebase.auth.FacebookAuthProvider()
     )
   }
+
   isLoggedIn() {
     if (this.userDetails == null) {
       return false;
@@ -36,8 +42,9 @@ export class AuthService {
       return true;
     }
   }
+
   logout() {
     this._firebaseAuth.auth.signOut()
-      .then((res) => this.router.navigate(['/']));
+      .then((res) => this.router.navigate(['/login']));
   }
 }

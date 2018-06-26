@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   signInWithFacebook() {
     this.authService.signInWithFacebook()
     .then((res) => { 
-        this.router.navigate(['classroom'])
+        this.router.navigate(['login'])
       })
     .catch((err) => console.log(err));
   }

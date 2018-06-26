@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SemanticDropdownDirective } from '../semantic-dropdown.directive';
 import { Location } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-menu-nav',
@@ -12,7 +13,10 @@ export class MenuNavComponent implements OnInit {
 
   sidebar = false;
 
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+    public authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
