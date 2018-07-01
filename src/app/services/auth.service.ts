@@ -1,8 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-import { AngularFireAuth } from 'angularfire2/auth';
+
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+
+import { Observable, of } from 'rxjs';
+import { switchMap} from 'rxjs/operators';
+
+interface Student {
+  uid: string;
+  name: string;
+  displayName: string;
+  email: string;
+  rank: string;
+  bio?: string;
+  avatar?: string;
+  active: boolean;
+}
 
 @Injectable()
 export class AuthService {
@@ -12,27 +27,51 @@ export class AuthService {
 
   constructor(
      private _firebaseAuth: AngularFireAuth,
+     private afs: AngularFirestore,
      private router: Router
     ) {
 
-    this.user = _firebaseAuth.authState;
-    this.user.subscribe(
-      (user) => {
+    this.user = _firebaseAuth.authState.pipe(
+      switchMap(user => {
         if (user) {
-          this.userDetails = user;
-          //console.log(this.userDetails);
+          return this.afs.doc<firebase.User>(`students/${user.uid}`).valueChanges()
+        } else {
+          return of(null)
         }
-        else {
-          this.userDetails = null;
-        }
-      }
-    );
+      }));
   }
 
   signInWithFacebook() {
-    return this._firebaseAuth.auth.signInWithPopup(
-      new firebase.auth.FacebookAuthProvider()
-    )
+    const provider =  new firebase.auth.FacebookAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+  private oAuthLogin(provider) {
+    return this._firebaseAuth.auth.signInWithPopup(provider)
+      .then((credential) => {
+        this.updateUserData(credential.user)
+      })
+  }
+
+  private updateUserData(user) {
+    // Sets user data to firestore on login
+
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`students/${user.uid}`);
+
+    const data: Student = {
+      
+      uid: user.uid,
+      name: user.name,
+      rank: user.rank,
+      bio: user.bio,
+      active: user.active,
+      email: user.email,
+      displayName: user.displayName,
+      avatar: user.avatar,
+
+    }
+
+    return userRef.set(data, { merge: true })
+
   }
 
   isLoggedIn() {

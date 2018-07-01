@@ -9,6 +9,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './services/auth.service';
 
+/* Core module */
+import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { MenuNavComponent } from './menu-nav/menu-nav.component';
@@ -44,7 +46,7 @@ import { DialogModule } from 'primeng/dialog';
     DocumentsComponent,
     AdminComponent,
     LoginComponent,
-    LikesComponent
+    LikesComponent  
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { DialogModule } from 'primeng/dialog';
     DialogModule,
     AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    CoreModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
