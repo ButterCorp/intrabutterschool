@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Location } from '@angular/common';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,9 @@ import { Location } from '@angular/common';
 
 export class AppComponent {
   title = 'ibs';
-
-  constructor() {
+  items: Observable<any[]>;
+  constructor(db: AngularFirestore) {
+    this.items = db.collection('items').valueChanges();
   }
 
   ngOnInit() {

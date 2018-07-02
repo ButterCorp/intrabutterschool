@@ -19,10 +19,13 @@ interface Student {
   active: boolean;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+}
+)
 export class AuthService {
 
-  private user: Observable<firebase.User>;
+  user: Observable<Student>;
   private userDetails: firebase.User = null;
 
   constructor(
@@ -31,10 +34,10 @@ export class AuthService {
      private router: Router
     ) {
 
-    this.user = _firebaseAuth.authState.pipe(
+    this.user = this._firebaseAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<firebase.User>(`students/${user.uid}`).valueChanges()
+          return this.afs.doc<Student>(`students/${user.uid}`).valueChanges()
         } else {
           return of(null)
         }
@@ -56,17 +59,16 @@ export class AuthService {
     // Sets user data to firestore on login
 
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`students/${user.uid}`);
-
     const data: Student = {
       
       uid: user.uid,
-      name: user.name,
-      rank: user.rank,
-      bio: user.bio,
-      active: user.active,
+      name: user.name || '',
+      rank: user.rank|| 'Newbie',
+      bio: user.bio || '',
+      active: user.active || true,
       email: user.email,
       displayName: user.displayName,
-      avatar: user.avatar,
+      avatar: user.photoURL|| 'http://i67.tinypic.com/2u4ojn6.jpg',
 
     }
 

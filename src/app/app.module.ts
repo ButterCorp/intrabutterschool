@@ -8,6 +8,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './services/auth.service';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 /* Core module */
 import { CoreModule } from './core/core.module';
@@ -29,8 +31,9 @@ import { DocumentsComponent } from './documents/documents.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { LikesComponent } from './likes/likes.component';
-
+import {ButtonModule} from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { AuthGuard } from './core/auth.guard';
 
 @NgModule({
   declarations: [
@@ -57,12 +60,15 @@ import { DialogModule } from 'primeng/dialog';
       InMemoryDataService, { dataEncapsulation: false }
     ),
     DialogModule,
+    ButtonModule,
     AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
     CoreModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

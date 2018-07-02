@@ -39,10 +39,10 @@ export class DocumentsComponent implements OnInit {
         .subscribe(students => this.students = students)
   }
 
-  showCredentialFromStudent(id: number, credential: string): String {
+  showCredentialFromStudent(id: String, credential: string): String {
       if(typeof this.students == "undefined"){ return; }
        var students = this.students;
-       var result = students.filter(student => student.id == id);
+       var result = students.filter(student => student.uid == id);
        return result[0][credential];
  }
 

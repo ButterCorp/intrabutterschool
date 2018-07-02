@@ -9,6 +9,7 @@ import { DocumentService } from '../document.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Likes } from '../likes';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -38,7 +39,8 @@ export class ProfileComponent implements OnInit {
     private postService: PostService,
     private documentService: DocumentService,
     private location: Location,
-    private likesService: LikesService
+    private likesService: LikesService,
+    public auth: AuthService
   ) { }
 
   showDialog(id: string) {

@@ -23,21 +23,41 @@
   </div>
 
   <div class="ui bottom attached segment">
-    <p>
-        <button type="buton" class="btn btn-block" (click)="signInWithFacebook()">
-            <i class="fa fa-facebook" aria-hidden="true"></i> 
-            Login with Facebook
-          </button>
-    </p>
-    
+      <div *ngIf="auth.user | async; then authenticated else guest">
+        <!-- template will replace this div -->
+      </div>
   </div>
+  
 
-  <div class="ui bottom attached segment">
+
+<!-- User NOT logged in -->
+<ng-template #guest>
+  
+    <h3>Howdy, GUEST</h3>
+    <button type="buton" class="btn btn-block" (click)="auth.signInWithFacebook()">
+      <i class="fa fa-facebook" aria-hidden="true"></i> 
+      Login with Facebook
+    </button>
+</ng-template>
+
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user | async as user">
+    <h3>Howdy, {{ user.displayName }}</h3>
+    <img  [src]="user?.avatar">
+    <p>UID: {{ user.uid }}</p>
+    <p>Avatar Url: {{ user?.avatar }} </p>
+    <button (click)="auth.logout()">Logout</button>
+  </div>
+  
+</ng-template>
+
+<div class="ui bottom attached segment">
     <p>hello 2</p>
   </div>
 
   <div class="ui bottom attached segment">
     <p>hello 3</p>
   </div>
-
 </div>
