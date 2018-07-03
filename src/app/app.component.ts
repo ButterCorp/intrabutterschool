@@ -3,6 +3,7 @@ import { AuthService } from './services/auth.service';
 import { Location } from '@angular/common';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import {FirestoreService } from './core/firestore.service';
 
 @Component({
   selector: 'app-root',

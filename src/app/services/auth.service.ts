@@ -8,7 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { Observable, of } from 'rxjs';
 import { switchMap} from 'rxjs/operators';
 
-interface Student {
+export interface Student {
   uid: string;
   name: string;
   displayName: string;

@@ -34,6 +34,9 @@ import { LikesComponent } from './likes/likes.component';
 import {ButtonModule} from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { AuthGuard } from './core/auth.guard';
+import { FirestoreService } from './core/firestore.service';
+
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,7 @@ import { AuthGuard } from './core/auth.guard';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -68,7 +72,7 @@ import { AuthGuard } from './core/auth.guard';
     AngularFirestoreModule,
     CoreModule,
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, FirestoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
