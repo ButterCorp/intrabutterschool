@@ -23,6 +23,7 @@
     "angular-in-memory-web-api": "^0.6.0",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
+    "npm": "^6.1.0",
     "primeicons": "^1.0.0-beta.7",
     "primeng": "^6.0.0-beta.1",
     "rxjs": "^6.0.0",
