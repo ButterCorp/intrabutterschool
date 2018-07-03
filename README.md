@@ -64,7 +64,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 #### Step 1: Clone this repository
 
 ```
-git clone git@github.com:ButterCorp/intrabutterschool.git
+git clone git@github.com:ButterCorp/intrabutterschool-front.git
 ```
 and 
 ```
