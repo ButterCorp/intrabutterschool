@@ -6,7 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Observable, of } from 'rxjs';
-import { switchMap} from 'rxjs/operators';
+import { switchMap, first} from 'rxjs/operators';
 
 export interface Student {
   uid: string;
@@ -24,7 +24,6 @@ export interface Student {
 }
 )
 export class AuthService {
-
   user: Observable<Student>;
   private userDetails: firebase.User = null;
 
@@ -33,7 +32,6 @@ export class AuthService {
      private afs: AngularFirestore,
      private router: Router
     ) {
-
     this.user = this._firebaseAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -46,6 +44,7 @@ export class AuthService {
 
   signInWithFacebook() {
     const provider =  new firebase.auth.FacebookAuthProvider();
+    provider.addScope("user_friends");
     return this.oAuthLogin(provider);
   }
   private oAuthLogin(provider) {
@@ -77,11 +76,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    if (this.userDetails == null) {
-      return false;
-    } else {
-      return true;
-    }
+    return this._firebaseAuth.authState.pipe(first());
   }
 
   logout() {

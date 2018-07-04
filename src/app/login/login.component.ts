@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
+    
     this.auth.user.subscribe(user => {
+      if(user!= null)
       this.uid = user.uid;
     });
   }
