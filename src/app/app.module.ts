@@ -22,8 +22,6 @@ import { AppRoutingModule } from './/app-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SemanticSidebarDirective } from './semantic-sidebar.directive';
 import { SemanticStickyDirective } from './semantic-sticky.directive';
@@ -60,9 +58,6 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
     DialogModule,
     ButtonModule,
     AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),

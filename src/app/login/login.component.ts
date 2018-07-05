@@ -5,6 +5,7 @@ import { FirestoreService } from '../core/firestore.service';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
+import { Config } from 'protractor';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   usernameAvailable: boolean;
   studentsCollection: AngularFirestoreCollection<Student>;
   students: Observable<Student[]>;
+  studentFriendsList: any;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -29,12 +31,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     
     this.auth.user.subscribe(user => {
-      if(user!= null)
+      if(user != null)
       this.uid = user.uid;
+      this.getFriendsList();
     });
   }
   checkeUsername() {
-    
     this.studentsCollection =  this.afs.collection('students', ref => ref.where('name', '==', this.usernameText));
     this.students = this.studentsCollection.snapshotChanges()
     .pipe(
@@ -68,9 +70,15 @@ export class LoginComponent implements OnInit {
   setName(){
     this.afsService.upsert(`students/${this.uid}`, {username: this.usernameText});
     this.usernameText = '';
-    this.getName();
   }
-  getName(){
+  getFriendsList(){
+    this.auth.getFacebookFriendsList().subscribe(
+      (data) => {
+        this.studentFriendsList = data;
+        console.log(this.studentFriendsList.summary['total_count']);
+      }
+      
+    );
   }
   checkUsername(){
     this.afsService.col$('students', ref => ref.where('name', '==', this.usernameText))
@@ -80,14 +88,5 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-  /*
-  signInWithFacebook() {
-    this.authService.signInWithFacebook()
-    .then((res) => { 
-        this.router.navigate(['login'])
-      })
-    .catch((err) => console.log(err));
-  }
-  */
 
 }

@@ -63,6 +63,7 @@
       <p class="help is-danger" *ngIf="!usernameAvailable && usernameText">
         @{{usernameText}} has already been taken
       </p>
+      <p>Your friends : {{ studentFriendsList.summary['total_count'] }}</p>
       <button class="button is-primary" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
         Select Username
       </button>
