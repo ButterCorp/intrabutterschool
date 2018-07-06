@@ -33,10 +33,7 @@
   <!-- User NOT logged in -->
   <ng-template #guest>
     <div class="ui bottom attached segment">
-      <h3>Howdy, GUEST</h3>
-      <button type="buton" class="btn btn-block" (click)="auth.signInWithFacebook()">
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-        Login with Facebook
+      <button type="buton" pButton class="ui-button-primary" (click)="auth.signInWithFacebook()" label="Login with Facebook">
       </button>
     </div>
   </ng-template>
@@ -55,13 +52,24 @@
     </div>
     <div class="ui bottom attached segment">
       <h3>Choose a Username</h3>
+      <div class="ui-g-12">
+        <span class="ui-float-label">
+          <input type="text" pInputText id="float-input" size="30" [(ngModel)]="usernameText" [ngClass]="{
+                'ng-dirty ng-valid':usernameAvailable && usernameText,
+                'ng-dirty ng-invalid':!usernameAvailable && usernameText
+              }" (keyup)="checkUsername()">
+          <label for="float-input">Username</label>
+        </span>
+      </div>
 
-      <input type="text" class="input" placeholder="choose a username" [(ngModel)]="usernameText" (keyup)="checkeUsername()">
+
       <p class="help is-success" *ngIf="usernameAvailable && usernameText">
-        @{{usernameText}} is available
+        <p-message severity="success" text="available"></p-message>
       </p>
+
       <p class="help is-danger" *ngIf="!usernameAvailable && usernameText">
-        @{{usernameText}} has already been taken
+        <p-message severity="error" text="unavailable"></p-message>
+
       </p>
       <p>Your friends : {{ studentFriendsList.summary['total_count'] }}</p>
       <button class="button is-primary" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
@@ -69,14 +77,4 @@
       </button>
     </div>
   </ng-template>
-
-  <div class="ui bottom attached segment">
-    <!-- <input [(ngModel)]="content" placeholder="Choose your own username" class="input" name="username"> -->
-    <!-- <button class="button is-success" (click)="setName()" [disabled]="content?.length < 2 || content?.length > 100"> -->
-    <!-- Save -->
-    <!-- </button> -->
-  </div>
-  <div class="ui bottom attached segment">
-    <p>hello 3</p>
-  </div>
 </div>

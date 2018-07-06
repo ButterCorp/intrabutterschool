@@ -30,12 +30,16 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { LikesComponent } from './likes/likes.component';
 import {ButtonModule} from 'primeng/button';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
+
 import { AuthGuard } from './core/auth.guard';
 import { FirestoreService } from './core/firestore.service';
 
 import { FormsModule } from '@angular/forms';
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +57,7 @@ import { FormsModule } from '@angular/forms';
     LikesComponent  
   ],
   imports: [
+    AngularFontAwesomeModule,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -60,6 +65,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     DialogModule,
     ButtonModule,
+    MessagesModule,
+    MessageModule,
+    InputTextModule,
     AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
