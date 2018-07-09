@@ -50,7 +50,7 @@
         <button (click)="auth.logout()">Logout</button>
       </div>
     </div>
-    <div class="ui bottom attached segment">
+    <div class="ui ui-md-12 bottom attached segment">
       <h3>Choose a Username</h3>
       <div class="ui-g-12">
         <span class="ui-float-label">
@@ -71,10 +71,11 @@
         <p-message severity="error" text="unavailable"></p-message>
 
       </p>
-      <p>Your friends : {{ studentFriendsList.summary['total_count'] }}</p>
-      <button class="button is-primary" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
-        Select Username
+      <button pButton type="button"  label="Select Username" class="ui-button-success" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
       </button>
+      <div *ngIf="friendsCount">
+        <p>Your friends : {{ friendsCount }}</p>
+      </div>
     </div>
   </ng-template>
 </div>

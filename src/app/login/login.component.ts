@@ -6,7 +6,6 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,43 +18,90 @@ export class LoginComponent implements OnInit {
   studentsCollection: AngularFirestoreCollection<Student>;
   students: Observable<Student[]>;
   studentFriendsList: any;
+  friendsCount: number;
+  hasUsernameValue: boolean;
   constructor(
     private auth: AuthService,
     private router: Router,
     private afsService: FirestoreService,
     private afs: AngularFirestore
   ) {
+    this.auth.user.subscribe(user => {
+      if (user) {
+        console.log("loggin in");
+        this.uid = user.uid;
+        if(this.uid){
+        this.hasUsername();
+          
+        }
+      }
+    });
   }
 
   ngOnInit() {
-    this.auth.user.subscribe(user => {
-      if (user != null) {
-        console.log("loggin in");
-        this.uid = user.uid;
-        this.getFriendsList();
-      }
-    });
+    
   }
   setName() {
     this.afsService.upsert(`students/${this.uid}`, { username: this.usernameText });
     this.usernameText = '';
+    this.getFriendsList();
   }
   getFriendsList() {
     this.auth.getFacebookFriendsList().subscribe(
       (data) => {
         this.studentFriendsList = data;
-        console.log(this.studentFriendsList.summary['total_count']);
+        this.friendsCount = this.studentFriendsList.summary['total_count'];
       }
 
     );
   }
-  checkUsername() {
-    this.afsService.col$('students', ref => ref.where('username', '==', this.usernameText))
-      .subscribe(
-        username => {
-          this.usernameAvailable = !username
+  hasUsername() {
+    this.hasUsernameValue = false;
+    this.afs.collection('students/').doc(this.uid).ref.get().then(
+      (documentSnapshot) => {
+        if(documentSnapshot.exists){
+          if(documentSnapshot.data().username){
+            this.hasUsernameValue = true;
+            console.log(documentSnapshot.data().username);
+            console.log(this.hasUsernameValue);
+          }
         }
-      )
+        else{
+          console.log("Document not found");
+        }
+      }
+    );
   }
+  checkUsername() {
+    this.studentsCollection = this.afs.collection('students', ref => ref.where('username', '==', this.usernameText));
+    this.students = this.studentsCollection.snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(action => {
+            const data = action.payload.doc.data() as Student;
+            const uid = action.payload.doc.id;
+            return {
+              uid,
+              name: data.name,
+              displayName: data.displayName,
+              rank: data.rank,
+              bio: data.bio,
+              active: data.active,
+              email: data.email,
+              avatar: data.avatar,
+            }
+          });
+        })
+      )
+      ;
 
+    this.students.subscribe(snapshot => {
+      if (snapshot.length == 0) {
+        this.usernameAvailable = true;
+      } else {
+        this.usernameAvailable = false;
+      }
+    })
+
+  }
 }
