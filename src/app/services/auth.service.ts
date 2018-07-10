@@ -56,7 +56,10 @@ export class AuthService {
   private oAuthLogin(provider) {
     return this._firebaseAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.token = credential.credential.accessToken;
+        var myProp = 'accessToken';
+        if(credential.credential.hasOwnProperty(myProp)){
+          this.token = credential.credential[myProp];
+      }
         this.updateUserData(credential.user)
       })
   }
