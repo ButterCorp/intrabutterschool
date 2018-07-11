@@ -51,30 +51,36 @@
       </div>
     </div>
     <div class="ui ui-md-12 bottom attached segment">
-      <h3>Choose a Username</h3>
-      <div class="ui-g-12">
-        <span class="ui-float-label">
-          <input type="text" pInputText id="float-input" size="30" [(ngModel)]="usernameText" [ngClass]="{
-                'ng-dirty ng-valid':usernameAvailable && usernameText,
-                'ng-dirty ng-invalid':!usernameAvailable && usernameText
-              }" (keyup)="checkUsername()">
-          <label for="float-input">Username</label>
-        </span>
+      
+      <div *ngIf="!hasUsernameValue">
+          <h3>Choose a Username</h3>
+          <div class="ui-g-12">
+            <span class="ui-float-label">
+              <input type="text" pInputText id="float-input" size="30" [(ngModel)]="usernameText" [ngClass]="{
+                    'ng-dirty ng-valid':usernameAvailable && usernameText,
+                    'ng-dirty ng-invalid':!usernameAvailable && usernameText
+                  }" (keyup)="checkUsername()">
+              <label for="float-input">Username</label>
+            </span>
+          </div>
+    
+    
+          <p class="help is-success" *ngIf="usernameAvailable && usernameText">
+            <p-message severity="success" text="available"></p-message>
+          </p>
+    
+          <p class="help is-danger" *ngIf="!usernameAvailable && usernameText">
+            <p-message severity="error" text="unavailable"></p-message>
+    
+          </p>
+        <button pButton type="button"  label="Select Username" class="ui-button-success" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
+        </button>
       </div>
-
-
-      <p class="help is-success" *ngIf="usernameAvailable && usernameText">
-        <p-message severity="success" text="available"></p-message>
-      </p>
-
-      <p class="help is-danger" *ngIf="!usernameAvailable && usernameText">
-        <p-message severity="error" text="unavailable"></p-message>
-
-      </p>
-      <button pButton type="button"  label="Select Username" class="ui-button-success" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
-      </button>
-      <div *ngIf="friendsCount">
-        <p>Your friends : {{ friendsCount }}</p>
+      <div *ngIf="friendsCount && (friendsCount > 500)">
+        <p>You popular bastard you got {{ friendsCount }} friends on Facebook. Now the ones whos joins the App will be displayed in the next step.</p>
+      </div>
+      <div *ngIf="friendsCount && (friendsCount < 500)">
+        <p>You got some Facebook friends ({{ friendsCount }} !), smooth. Now the ones whos joins the App will be displayed in the next step.</p>
       </div>
     </div>
   </ng-template>
