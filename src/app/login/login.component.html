@@ -76,12 +76,45 @@
         <button pButton type="button"  label="Select Username" class="ui-button-success" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
         </button>
       </div>
-      <div *ngIf="friendsCount && (friendsCount > 500)">
-        <p>You popular bastard you got {{ friendsCount }} friends on Facebook. Now the ones whos joins the App will be displayed in the next step.</p>
+      <h2 class="ui center aligned icon header">
+        <i class="circular users icon"></i>
+        {{ friendsCount }} Friends
+      </h2>
+      <div class="ui message transition Visible">
+        <i class="close icon"></i>
+        <div class="header">
+          Welcome back!
+        </div>
+    </div>
+        <div *ngIf="friendsCount && (friendsCount > 500)">
+            <div class="ui positive message">
+                <i class="close icon"></i>
+                <div class="header">
+                    You popular bastard
+                </div>
+                <p>you got <strong class="green">{{ friendsCount }} </strong>friends on Facebook. Now the ones whos joins the App will be displayed in the next step.</p>
+            </div>
+        </div>
+        <div *ngIf="friendsCount && (friendsCount < 500)">
+            <div class="ui positive message">
+                <i class="close icon"></i>
+                <div class="header">
+                  You have some social skills
+                </div>
+                <p>you got <strong class="pink">{{ friendsCount }} </strong>friends on Facebook. Now the ones whos joins the App will be displayed in the next step.</p>
+            </div>
       </div>
-      <div *ngIf="friendsCount && (friendsCount < 500)">
-        <p>You got some Facebook friends ({{ friendsCount }} !), smooth. Now the ones whos joins the App will be displayed in the next step.</p>
-      </div>
+     
     </div>
   </ng-template>
 </div>
+<script>
+  $('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  })
+;
+</script>
