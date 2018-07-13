@@ -33,8 +33,10 @@
   <!-- User NOT logged in -->
   <ng-template #guest>
     <div class="ui bottom attached segment">
-      <button type="buton" pButton class="ui-button-primary" (click)="auth.signInWithFacebook()" label="Login with Facebook">
-      </button>
+      <button class="ui facebook button" (click)="auth.signInWithFacebook()">
+          <i class="facebook icon"></i>
+          Facebook
+        </button>
     </div>
   </ng-template>
 
@@ -43,11 +45,21 @@
   <ng-template #authenticated>
     <div class="ui bottom attached segment">
       <div *ngIf="auth.user | async as user">
-        <h3>Howdy, {{ user.displayName }}</h3>
-        <img [src]="user?.avatar">
-        <p>UID: {{ user.uid }}</p>
-        <p>Avatar Url: {{ user?.avatar }} </p>
-        <button (click)="auth.logout()">Logout</button>
+          <div class="ui card">
+              <div class="image">
+                <img src="{{user?.avatar}}">
+              </div>
+              <div class="content">
+                <a class="header">Howdy, {{user.displayName}}</a>
+                <div class="meta">
+                  <span class="date">{{ user.rank }}</span>
+                </div>
+                <div class="description">
+                  {{user.email}}
+                </div>
+              </div>
+            </div>
+        <button class="ui button" (click)="auth.logout()">Logout</button>
       </div>
     </div>
     <div class="ui ui-md-12 bottom attached segment">
@@ -76,28 +88,28 @@
         <button pButton type="button"  label="Select Username" class="ui-button-success" [disabled]="!usernameAvailable || !usernameText" (click)="setName()">
         </button>
       </div>
-      <h2 class="ui center aligned icon header">
+      <h2 class="ui center aligned icon header" *ngIf="friendsCount>0">
         <i class="circular users icon"></i>
         {{ friendsCount }} Friends
       </h2>
-      <div class="ui message transition Visible">
-        <i class="close icon"></i>
+      <div *ngIf="closableWelcome==false" class="ui message transition Visible">
+        <i class="close icon" (click)="closableWelcome=true"></i>
         <div class="header">
           Welcome back!
         </div>
     </div>
-        <div *ngIf="friendsCount && (friendsCount > 500)">
+        <div *ngIf="friendsCount && (friendsCount > 500) && closableFriendsMessage==false">
             <div class="ui positive message">
-                <i class="close icon"></i>
+                <i class="close icon" (click)="closableFriendsMessage=true"></i>
                 <div class="header">
                     You popular bastard
                 </div>
                 <p>you got <strong class="green">{{ friendsCount }} </strong>friends on Facebook. Now the ones whos joins the App will be displayed in the next step.</p>
             </div>
         </div>
-        <div *ngIf="friendsCount && (friendsCount < 500)">
+        <div *ngIf="friendsCount > 0 && (friendsCount < 500) && closableFriendsMessage==false">
             <div class="ui positive message">
-                <i class="close icon"></i>
+                <i class="close icon" (click)="closableFriendsMessage=true"></i>
                 <div class="header">
                   You have some social skills
                 </div>
@@ -108,13 +120,3 @@
     </div>
   </ng-template>
 </div>
-<script>
-  $('.message .close')
-  .on('click', function() {
-    $(this)
-      .closest('.message')
-      .transition('fade')
-    ;
-  })
-;
-</script>

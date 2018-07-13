@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
   studentFriendsList: any;
   friendsCount: number;
   hasUsernameValue: boolean;
+
+  /* Closables */
+  closableWelcome: boolean;
+  closableFriendsMessage: boolean;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -39,7 +43,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.closableWelcome = false;
+    this.closableFriendsMessage = false;
+    console.log("closable welcome" +this.closableWelcome);
   }
   setName() {
     this.afsService.upsert(`students/${this.uid}`, { username: this.usernameText });
