@@ -1,20 +1,20 @@
 <div class="ui container" style="margin-top: 50px">
 
   <div class="ui ordered steps" style="width: 100%;">
-    <div class="active step">
+    <div class="step" [ngClass]="{'active': step == null,'completed': step == 'middle' || step == 'final'}">
       <div class="content">
         <div class="title">Lié facebook</div>
         <div class="description">Vous pourrez ensuite directement
           <br> inviter vos amis depuis votre compte facebook</div>
       </div>
     </div>
-    <div class="step">
+    <div class="step"  [ngClass]="{'active': step == 'middle','completed': step == 'final'}">
       <div class="content">
         <div class="title">Créer sa classe</div>
         <div class="description">Définissez votre espace de travail</div>
       </div>
     </div>
-    <div class="step">
+    <div class="step"  [ngClass]="{'active': step == 'final'}">
       <div class="content">
         <div class="title">Préferences</div>
         <div class="description">Modifiez vos préferences</div>
@@ -43,14 +43,14 @@
 
   <!-- User logged in -->
   <ng-template #authenticated>
-    <div class="ui bottom attached segment">
+    <div class="ui bottom attached segment" *ngIf="hideStep!='middle'">
       <div *ngIf="auth.user | async as user">
           <div class="ui card">
               <div class="image">
                 <img src="{{user?.avatar}}">
               </div>
               <div class="content">
-                <a class="header">Howdy, {{user.displayName}}</a>
+                <a class="header">Bienvenue, {{user.displayName}}</a>
                 <div class="meta">
                   <span class="date">{{ user.rank }}</span>
                 </div>
@@ -59,20 +59,43 @@
                 </div>
               </div>
             </div>
-        <button class="ui button" (click)="auth.logout()">Logout</button>
+        <button class="ui button" (click)="auth.logout()">Déconnexion</button>
+        <div *ngIf="step=='middle'">
+            <div class="two wide column"></div>
+            <div class="eight wide column"><button class="ui right labeled icon button positive basic" (click)="hideStep='middle'">
+                <i class="right arrow icon"></i>
+                La suite !
+              </button></div>
+        </div>
       </div>
+    </div>
+    <div *ngIf="hideStep=='middle' && step!='final'">
+       <div *ngIf="studentFriendsList.data<1">
+          <div class="ui warning message" *ngIf="closeWarningMessageMiddleStep == false">
+              <i class="close icon" (click)="closeWarningMessageMiddleStep=true"></i>
+              <div class="header">
+                Aucun de tes amis Facebook n'a rejoint l'application, mais c'est pas grave!
+              </div>
+              Dis-leur de se connecter rapidement pour créer ton équipe.
+              Tu peux toujours compléter ton profil et même prendre les devants pour créer ta classe!
+            </div>
+            <div class="eight wide column"><a routerLink="/classroom"><button class="ui right labeled icon button positive basic">
+                <i class="right arrow icon"></i>
+                La suite !
+              </button></a></div>
+       </div>
     </div>
     <div class="ui ui-md-12 bottom attached segment">
       
       <div *ngIf="!hasUsernameValue">
-          <h3>Choose a Username</h3>
+          <h3>Choisir un pseudo</h3>
           <div class="ui-g-12">
             <span class="ui-float-label">
               <input type="text" pInputText id="float-input" size="30" [(ngModel)]="usernameText" [ngClass]="{
                     'ng-dirty ng-valid':usernameAvailable && usernameText,
                     'ng-dirty ng-invalid':!usernameAvailable && usernameText
                   }" (keyup)="checkUsername()">
-              <label for="float-input">Username</label>
+              <label for="float-input">pseudo</label>
             </span>
           </div>
     
@@ -90,30 +113,24 @@
       </div>
       <h2 class="ui center aligned icon header" *ngIf="friendsCount>0">
         <i class="circular users icon"></i>
-        {{ friendsCount }} Friends
+        {{ friendsCount }} Amis
       </h2>
-      <div *ngIf="closableWelcome==false" class="ui message transition Visible">
-        <i class="close icon" (click)="closableWelcome=true"></i>
-        <div class="header">
-          Welcome back!
-        </div>
-    </div>
         <div *ngIf="friendsCount && (friendsCount > 500) && closableFriendsMessage==false">
             <div class="ui positive message">
                 <i class="close icon" (click)="closableFriendsMessage=true"></i>
                 <div class="header">
-                    You popular bastard
+                    Un monste populaire!
                 </div>
-                <p>you got <strong class="green">{{ friendsCount }} </strong>friends on Facebook. Now the ones whos joins the App will be displayed in the next step.</p>
+                <p>Tu as <strong class="green">{{ friendsCount }} </strong>amis sur Facebook. Tes amis qui ont déjà rejoint IBS seront affichés au step suivant.</p>
             </div>
         </div>
         <div *ngIf="friendsCount > 0 && (friendsCount < 500) && closableFriendsMessage==false">
             <div class="ui positive message">
                 <i class="close icon" (click)="closableFriendsMessage=true"></i>
                 <div class="header">
-                  You have some social skills
+                  Les réseaux sociaux te parlent !
                 </div>
-                <p>you got <strong class="pink">{{ friendsCount }} </strong>friends on Facebook. Now the ones whos joins the App will be displayed in the next step.</p>
+                <p>Tu as <strong class="pink">{{ friendsCount }} </strong>amis sur Facebook. Tes amis qui ont déjà rejoint IBS seront affichés au step suivant.</p>
             </div>
       </div>
      

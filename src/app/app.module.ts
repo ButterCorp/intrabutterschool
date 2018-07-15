@@ -34,6 +34,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
+import {DragDropModule} from 'primeng/dragdrop';
 
 import { AuthGuard } from './core/auth.guard';
 import { FirestoreService } from './core/firestore.service';
@@ -67,6 +68,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ButtonModule,
     MessagesModule,
     MessageModule,
+    DragDropModule,
     InputTextModule,
     AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireDatabaseModule,

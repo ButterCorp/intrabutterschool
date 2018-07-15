@@ -20,10 +20,12 @@ export class LoginComponent implements OnInit {
   studentFriendsList: any;
   friendsCount: number;
   hasUsernameValue: boolean;
-
+  step: String;
+  hideStep: String;
   /* Closables */
   closableWelcome: boolean;
   closableFriendsMessage: boolean;
+  closeWarningMessageMiddleStep: boolean;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -45,18 +47,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.closableWelcome = false;
     this.closableFriendsMessage = false;
-    console.log("closable welcome" +this.closableWelcome);
+    this.closeWarningMessageMiddleStep=false;
   }
   setName() {
     this.afsService.upsert(`students/${this.uid}`, { username: this.usernameText });
     this.usernameText = '';
     this.getFriendsList();
+    this.step = "middle";
   }
   getFriendsList() {
     this.auth.getFacebookFriendsList().subscribe(
       (data) => {
         this.studentFriendsList = data;
         this.friendsCount = this.studentFriendsList.summary['total_count'];
+        console.log(this.studentFriendsList);
       }
 
     );
@@ -68,6 +72,7 @@ export class LoginComponent implements OnInit {
         if(documentSnapshot.exists){
           if(documentSnapshot.data().username){
             this.hasUsernameValue = true;
+            this.step = "middle";
             console.log(documentSnapshot.data().username);
             console.log(this.hasUsernameValue);
           }
