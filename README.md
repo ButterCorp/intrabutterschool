@@ -1,5 +1,7 @@
 # Intra Butter School
 
+[![Build Status](https://travis-ci.org/ButterCorp/intrabutterschool-front.svg?branch=master)](https://travis-ci.org/ButterCorp/intrabutterschool-front)
+
 IBS is an Open Source project : it consists in building a community platform allowing students of the same class to create a group through an OAuth2 connection via Facebook and thus be able to take classes simultaneously, share documents, consult their planning, configure reminders (control, duty, ...).
 
 We are eager to add some gammification into the project, to make it fun using it (not like regular schools ERP's ;) ). Moreover, fluidity, evolution and userExperience is our motto !
