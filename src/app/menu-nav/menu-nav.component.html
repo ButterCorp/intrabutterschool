@@ -1,4 +1,4 @@
-<div class="ui menu">
+<div class="ui menu" *ngIf="authService.isLoggedIn()">
   <a class="active item" title="Menu" sm-sidebar>
     <i class="ellipsis vertical left icon"></i>
     <div class="ui left demo vertical inverted sidebar labeled icon menu">
@@ -18,7 +18,7 @@
         <i class="sliders horizontal icon"></i>
         Administration
       </a>
-      <a class="item" routerLink="/logout">
+      <a class="item" (click)="authService.logout()">
         <i class="sign out alternate icon"></i>
         Se déconnecter
       </a>

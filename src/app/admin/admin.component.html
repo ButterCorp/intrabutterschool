@@ -23,7 +23,7 @@
     </div>
     <div class="twelve wide stretched column">
       <div class="ui segment" *ngIf="selectedItem == 'class'">
-        <h3>Classe {{classroom.name}}</h3>
+        <h3 *ngIf="classroom !== undefined">Classe {{classroom.name}}</h3>
       </div>
       <div class="ui segment" *ngIf="selectedItem == 'user'">
         <table class="ui very basic collapsing celled table" style="width: 100%">
@@ -52,10 +52,10 @@
                 {{student.rank}}
               </td>
               <td>
-                10
+                  {{getNbPublications(student.id)}}
               </td>
               <td>
-                7
+                  {{getNbFiles(student.id)}}
               </td>
               <td>
                 <div class="ui negative basic animated button" tabindex="0" 

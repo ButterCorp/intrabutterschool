@@ -8,15 +8,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthGuard } from './core/auth.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: '/classroom', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
-  { path: 'students', component: StudentComponent },
-  { path: 'classroom', component: ClassroomComponent },
-  { path: 'docs', component: DocumentsComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'students', component: StudentComponent, canActivate: [AuthGuard] },
+  { path: 'classroom', component: ClassroomComponent, canActivate: [AuthGuard] },
+  { path: 'docs', component: DocumentsComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   //{ path: 'logout', component: LogoutComponent },
-  { path: 'profile/:id', component: ProfileComponent },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
 
 ]
 

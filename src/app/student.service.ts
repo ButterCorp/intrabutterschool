@@ -37,7 +37,7 @@ export class StudentService {
   /** PUT: update the student on the server */
   updateStudent(student: Student): Observable<any> {
     return this.http.put(this.studentsUrl, student, httpOptions).pipe(
-      tap(_ => console.log(`updated student id=${student.id}`)),
+      tap(_ => console.log(`updated student id=${student.uid}`)),
       catchError(this.handleError<any>('udpateStudent'))
     );
   }

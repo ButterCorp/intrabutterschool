@@ -1,9 +1,8 @@
 export class Student {
-    id: number;
+    uid: string;
     name: string;
     rank: string;
     bio: string;
     avatar: string;
     active: boolean;
-    id_classroom: number;
 }

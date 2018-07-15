@@ -2,15 +2,15 @@
 
   <div class="ui container" style="margin-top: 50px;">
     <div class="ui secondary pointing tabular menu">
-      <a class="item {{(publications)?'active':''}}" (click)="docs = 0; publications = 1;">
+          <a class="item {{(selectedItem=='publications')?'active':''}}" (click)="selectedItem = 'publications'">
         Publications
       </a>
-      <a class="item {{(docs)?'active':''}}" (click)="docs = 1; publications = 0;">
+          <a class="item {{(selectedItem=='docs')?'active':''}}" (click)="selectedItem = 'docs'">
         Bibliothèque
       </a>
-      <!--<a class="item">
-                Friends
-              </a>-->
+      <a class="item {{(selectedItem=='like')?'active':''}}" (click)="selectedItem = 'like'">
+        Mentions j'aime
+      </a>
     </div>
     <div class="twelve wide stretched column">
       <div class="ui segment grid">
@@ -19,7 +19,24 @@
         </div>
         <div class="four wide column">
           <h1>{{student.name}}</h1>
-          <h4>{{student.bio}}</h4>
+          <p-dialog appendTo="body" header="Modifier la bio" [(visible)]="displaybio" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
+                  [minY]="70" [maximizable]="false" [baseZIndex]="10000">
+                  <div class="image content">
+                    <div class="image">
+                      <img class="ui avatar image" src="{{student.avatar}}">
+                    </div>
+                    <div class="description ui form">
+                      <div class="field">
+                        <textarea cols="80" rows="1" #bioContent>{{student.bio}}</textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <div class="ui button" (click)="displaybio=false">Annuler</div>
+                    <div class="ui button positive" (click)="updateBio(student, bioContent.value) ; displaybio = false ;">Mettre à jour</div>
+                  </div>
+                </p-dialog>
+          <h4>{{student.bio}} <i class="pencil alternate icon" title="Editer la bio" (click)="student = student; showDialog('bio')"></i> </h4>
         </div>
         <div class="four wide column">
           <p></p>
@@ -31,7 +48,7 @@
       </div>
     </div>
 
-    <div class="ui bottom attached segment" *ngIf="publications">
+    <div class="ui bottom attached segment" *ngIf="selectedItem == 'publications'">
 
       <div class="ui form" *ngIf="student.id == 1">
         <!-- a remplacer par auth.id() -->
@@ -42,7 +59,7 @@
         <div class="ui submit button primary" (click)="add(postContent.value); postContent.value=''">Envoyer</div>
       </div>
 
-      <h3 *ngIf="posts.length == 0" style="padding: 15px;">
+      <h3 *ngIf="posts !== undefined && posts.length == 0" style="padding: 15px;">
         {{student.name}} n'a encore rien publié sur son espace
         <i class="meh outline icon" style="font-size: 20px;"></i>
       </h3>
@@ -63,7 +80,7 @@
               <div class="actions-buttons" *ngIf="post.id_student == 1">
                 <!-- replace by auth.id -->
                 
-                <p-dialog header="Modifier la publication" [(visible)]="displayupdate" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
+                <p-dialog appendTo="body" header="Modifier la publication" [(visible)]="displayupdate" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
                   [minY]="70" [maximizable]="false" [baseZIndex]="10000">
                   <div class="image content">
                     <div class="image">
@@ -83,7 +100,7 @@
                 
                 <i class="pencil alternate icon" title="Editer le post" (click)="postToUpdate = post ; showDialog('update')"></i>
 
-                <p-dialog header="Supprimer une publication" [(visible)]="displaydelete" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
+                <p-dialog appendTo="body" header="Supprimer une publication" [(visible)]="displaydelete" [modal]="true" [responsive]="true" [width]="750" [minWidth]="200"
                   [minY]="70" [maximizable]="false" [baseZIndex]="10000">
                     <div class="ui icon header">
                       <i class="trash icon"></i>
@@ -111,8 +128,8 @@
               {{post.content}}
             </div>
             <div class="meta">
-              <a class="like">
-                <i class="like icon"></i> 4 Likes
+              <a class="like" (click)="updateLike(post.id)">
+                <i class="like icon"></i> {{showNumberOfLike(post.id)}} Likes
               </a>
             </div>
           </div>
@@ -121,7 +138,7 @@
 
     </div>
 
-    <div class="ui bottom attached segment" *ngIf="docs">
+    <div class="ui bottom attached segment" *ngIf="selectedItem == 'docs'">
       <h3 style="padding: 15px;">
         {{student.name}} à partagé {{documents.length}} documents
       </h3>
@@ -143,6 +160,25 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="ui bottom attached segment" *ngIf="selectedItem == 'like'">
+      <table class="ui selectable celled table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Contenu du posts</th>
+            <th>Id de l'author</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let like of likes">
+          <tr *ngIf="like.id_student == student.id">
+            <td>{{like.id}}</td>
+            <td>{{showPostFromId(like.id_post)}}</td>
+            <td>{{showAuthorFromPostId(like.id_post)}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   </div>
