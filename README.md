@@ -121,7 +121,7 @@ Robin Thorel : Carrying the project with his front skills. Co-founder of the But
 Younes Diouri : Back-end crazy/lazy BOI.
 
 
-See also the list of [contributors](https://github.com/ButterCorp/intrabutterschool/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ButterCorp/intrabutterschool-front/graphs/contributors) who participated in this project.
 
 ## License
 
